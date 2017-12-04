@@ -111,11 +111,8 @@ MouseArea {
                 horizontalAlignment:  Text.AlignHCenter
                 verticalAlignment:    Text.AlignVCenter
                 wrapMode:             Text.Wrap
-                text:                 "<b>" + qsTr("How to decorate Christmas Tree") + "</b>" + "<br><br>" +
-                                              qsTr("1. Press Settings button to choose how your tree and background image should look like. Press Settings button again to hide list of available options.") + "<br><br>" +
-                                              qsTr("2. Press Toys button to open toys gallery. Press Toys button again to hide this gallery.") + "<br><br>" +
-                                              qsTr("3. Select toy you like from gallery by holding your finger on it and then drag selected toy to appropriate place on Christmas Tree. Press and hold your finger on the toy to send it to background or bring to foreground. Move toy away from Christmas Tree to remove it.") + "<br><br>" +
-                                              qsTr("4. Repeat previous step, choosing different toys from gallery until you get your own wonderfully decorated Christmas Tree. Press Capture or Record buttons to save image or GIF of your Christmas Tree or share it with friends.")
+                text:                 "<b>" + qsTr("Christmas Snow Scenes") + "</b>" + "<br><br>" +
+                                              qsTr("Have fun with a variety of Christmas Snow Scenes. Press Settings button to select a scene. Shake your phone to cause a snowfall. Control wind speed and direction by sliding your finger across a screen.")
             }
         }
     }
