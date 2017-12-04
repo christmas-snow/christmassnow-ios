@@ -23,11 +23,11 @@ RESOURCES += \
     resources.qrc \
     translations.qrc
 
-#TRANSLATIONS += \
-#    translations/christmassnow_ru.ts \
-#    translations/christmassnow_de.ts \
-#    translations/christmassnow_fr.ts \
-#    translations/christmassnow_zh.ts
+TRANSLATIONS += \
+    translations/christmassnow_ru.ts \
+    translations/christmassnow_de.ts \
+    translations/christmassnow_fr.ts \
+    translations/christmassnow_zh.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
