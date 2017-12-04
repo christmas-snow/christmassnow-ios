@@ -2,19 +2,15 @@ import QtQuick 2.9
 
 Image {
     id:     spark
-    /*
     width:  sourceSize.width
     height: sourceSize.height
-    */
-    width:  48
-    height: 48
     source: "qrc:/resources/images/snow/sparks/spark_%1.png".arg(sparkType)
 
     property int sparkType:    1
     property int maxSparkType: 7
 
     SequentialAnimation {
-        id: twinkleSequentialAnimation
+        id: sparkSequentialAnimation
 
         onStopped: {
             var spark_type = spark.sparkType + 1;
@@ -46,15 +42,15 @@ Image {
     }
 
     Timer {
-        id:       twinkleAnimationTimer
+        id:       sparkAnimationTimer
         interval: 5000 + Math.floor(5000 * Math.random())
 
         onTriggered: {
-            twinkleSequentialAnimation.start();
+            sparkSequentialAnimation.start();
         }
     }
 
     Component.onCompleted: {
-        twinkleAnimationTimer.start();
+        sparkAnimationTimer.start();
     }
 }

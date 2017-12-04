@@ -830,8 +830,7 @@ Item {
             id:                   settingsListRectangle
             anchors.top:          parent.top
             anchors.bottom:       settingsButtonImage.top
-            anchors.left:         parent.left
-            //anchors.topMargin:    Math.max(bannerViewHeight + 8, 34)
+            anchors.topMargin:    Math.max(snowPage.bannerViewHeight + 8, 34)
             anchors.topMargin:    34
             anchors.bottomMargin: 16
             width:                96
