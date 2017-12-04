@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/BuildSettings.js</file>
+        <file>qml/main.qml</file>
+        <file>qml/Core/SnowPage.qml</file>
+        <file>qml/Core/Snow/Spark.qml</file>
+    </qresource>
+</RCC>

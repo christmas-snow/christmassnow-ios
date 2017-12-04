@@ -1,0 +1,38 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/images/snow/sparks/spark_1.png</file>
+        <file>resources/images/snow/sparks/spark_2.png</file>
+        <file>resources/images/snow/sparks/spark_3.png</file>
+        <file>resources/images/snow/sparks/spark_4.png</file>
+        <file>resources/images/snow/sparks/spark_5.png</file>
+        <file>resources/images/snow/sparks/spark_6.png</file>
+        <file>resources/images/snow/sparks/spark_7.png</file>
+        <file>resources/images/snow/bg-1-1.png</file>
+        <file>resources/images/snow/bg-1-2.png</file>
+        <file>resources/images/snow/bg-1-3.png</file>
+        <file>resources/images/snow/bg-1-4.png</file>
+        <file>resources/images/snow/bg-1.png</file>
+        <file>resources/images/snow/bg-2-1.png</file>
+        <file>resources/images/snow/bg-2-2.png</file>
+        <file>resources/images/snow/bg-2-3.png</file>
+        <file>resources/images/snow/bg-2-4.png</file>
+        <file>resources/images/snow/bg-2.png</file>
+        <file>resources/images/snow/bg-3-1.png</file>
+        <file>resources/images/snow/bg-3-2.png</file>
+        <file>resources/images/snow/bg-3-3.png</file>
+        <file>resources/images/snow/bg-3-4.png</file>
+        <file>resources/images/snow/bg-3.png</file>
+        <file>resources/images/snow/button_help.png</file>
+        <file>resources/images/snow/button_settings_pressed.png</file>
+        <file>resources/images/snow/button_settings.png</file>
+        <file>resources/images/snow/snowflake-1-big.png</file>
+        <file>resources/images/snow/snowflake-1-small.png</file>
+        <file>resources/images/snow/snowflake-2-big.png</file>
+        <file>resources/images/snow/snowflake-2-small.png</file>
+        <file>resources/images/snow/snowflake-3-big.png</file>
+        <file>resources/images/snow/snowflake-3-small.png</file>
+        <file>resources/images/snow/snowflake-4-big.png</file>
+        <file>resources/images/snow/snowflake-4-small.png</file>
+        <file>resources/sound/snow/music.mp3</file>
+    </qresource>
+</RCC>
