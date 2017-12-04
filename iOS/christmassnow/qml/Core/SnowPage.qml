@@ -265,6 +265,8 @@ Item {
                 currentBackgroundNum = background_num;
             }
 
+            buttonImageRow.visible = true;
+
             helpOnStartupTimer.restart();
             snowflakesCountTimer.restart();
             snowflakesAngleVelocityTimer.restart();
@@ -278,6 +280,8 @@ Item {
             if (background_num <= maxBackgroundNum) {
                 currentBackgroundNum = background_num;
             }
+
+            buttonImageRow.visible = true;
 
             helpOnStartupTimer.restart();
             snowflakesCountTimer.restart();
@@ -801,6 +805,14 @@ Item {
                 pressedX    = mouse.x;
                 pressedY    = mouse.y;
                 pressedTime = (new Date).getTime();
+            }
+
+            onDoubleClicked: {
+                if (buttonImageRow.visible && !settingsListRectangle.visible) {
+                    buttonImageRow.visible = false;
+                } else {
+                    buttonImageRow.visible = true;
+                }
             }
         }
 
