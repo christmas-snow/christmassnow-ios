@@ -2,7 +2,7 @@
   InfoPlist.strings
 */
 
-CFBundleDisplayName               = "Снежные пейзажи для детей";
+CFBundleDisplayName               = "Шар для детей";
 NSCameraUsageDescription          = "Пожалуйста, разрешите доступ к камере, если вы хотите воспользоваться этим функционалом";
 NSMotionUsageDescription          = "Пожалуйста, разрешите доступ к датчикам движения, чтобы приложение реагировало на движения телефона";
 NSPhotoLibraryAddUsageDescription = "Пожалуйста, разрешите доступ к Фотогалерее, чтобы сохранить изображение";
