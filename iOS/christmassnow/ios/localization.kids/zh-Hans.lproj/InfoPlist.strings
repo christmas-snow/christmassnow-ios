@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+*/
+
+CFBundleDisplayName               = "孩子们的雪景";
+NSCameraUsageDescription          = "如果您想访问此功能，请启用摄像头";
+NSMotionUsageDescription          = "请启用运动传感器访问权限，以便对手机动作进行响应";
+NSPhotoLibraryAddUsageDescription = "如果要保存捕获的图像，请启用对照片库的写入访问权限";

@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+*/
+
+CFBundleDisplayName               = "Scènes de neige";
+NSCameraUsageDescription          = "Veuillez activer l'accès à la caméra si vous souhaitez accéder à cette fonctionnalité";
+NSMotionUsageDescription          = "Veuillez activer l'accès aux capteurs de mouvement pour permettre les réactions aux mouvements du téléphone";
+NSPhotoLibraryAddUsageDescription = "Activez l'accès en écriture à la photothèque si vous souhaitez enregistrer l'image capturée";
