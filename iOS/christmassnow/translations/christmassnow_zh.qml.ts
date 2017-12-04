@@ -6,12 +6,12 @@
     <message>
         <location filename="../qml/Core/Dialog/HelpDialog.qml" line="114"/>
         <source>Christmas Snow Scenes</source>
-        <translation type="unfinished"></translation>
+        <translation>圣诞节雪场面</translation>
     </message>
     <message>
         <location filename="../qml/Core/Dialog/HelpDialog.qml" line="115"/>
         <source>Have fun with a variety of Christmas Snow Scenes. Press Settings button to select a scene. Shake your phone to cause a snowfall. Control wind speed and direction by sliding your finger across a screen. Double tap on screen to hide buttons or show them again.</source>
-        <translation type="unfinished"></translation>
+        <translation>玩各种圣诞雪景。 按设置按钮选择一个场景。 摇动手机，导致降雪。 通过在屏幕上滑动手指来控制风速和方向。 在屏幕上双击可隐藏按钮或再次显示。</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../qml/Core/Dialog/ParentalGateDialog.qml" line="131"/>
         <source>Slide with two fingers over this dialog to continue</source>
-        <translation type="unfinished"></translation>
+        <translation>用两个手指滑过对话框继续</translation>
     </message>
 </context>
 <context>
@@ -27,12 +27,12 @@
     <message>
         <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="162"/>
         <source>Purchase full version</source>
-        <translation type="unfinished"></translation>
+        <translation>购买完整版本</translation>
     </message>
     <message>
         <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="230"/>
         <source>Restore purchases</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复购买</translation>
     </message>
 </context>
 </TS>
