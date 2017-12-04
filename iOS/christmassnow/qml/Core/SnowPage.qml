@@ -553,7 +553,7 @@ Item {
             anchors.fill: parent
             system:       particleSystem1
             lifeSpan:     1000
-            size:         64
+            size:         32
             emitRate:     snowPage.bigSnowflakesCount
 
             velocity: AngleDirection {
@@ -580,7 +580,7 @@ Item {
             anchors.fill: parent
             system:       particleSystem2
             lifeSpan:     1000
-            size:         64
+            size:         32
             emitRate:     snowPage.bigSnowflakesCount
 
             velocity: AngleDirection {
@@ -607,7 +607,7 @@ Item {
             anchors.fill: parent
             system:       particleSystem3
             lifeSpan:     1000
-            size:         64
+            size:         32
             emitRate:     snowPage.bigSnowflakesCount
 
             velocity: AngleDirection {
@@ -634,7 +634,7 @@ Item {
             anchors.fill: parent
             system:       particleSystem4
             lifeSpan:     1000
-            size:         64
+            size:         32
             emitRate:     snowPage.bigSnowflakesCount
 
             velocity: AngleDirection {
@@ -661,6 +661,7 @@ Item {
             anchors.fill: parent
             system:       particleSystem5
             lifeSpan:     1000
+            size:         16
             emitRate:     snowPage.smallSnowflakesCount
 
             velocity: AngleDirection {
@@ -687,6 +688,7 @@ Item {
             anchors.fill: parent
             system:       particleSystem6
             lifeSpan:     1000
+            size:         16
             emitRate:     snowPage.smallSnowflakesCount
 
             velocity: AngleDirection {
@@ -713,6 +715,7 @@ Item {
             anchors.fill: parent
             system:       particleSystem7
             lifeSpan:     1000
+            size:         16
             emitRate:     snowPage.smallSnowflakesCount
 
             velocity: AngleDirection {
@@ -739,6 +742,7 @@ Item {
             anchors.fill: parent
             system:       particleSystem8
             lifeSpan:     1000
+            size:         16
             emitRate:     snowPage.smallSnowflakesCount
 
             velocity: AngleDirection {
@@ -831,7 +835,6 @@ Item {
             anchors.top:          parent.top
             anchors.bottom:       settingsButtonImage.top
             anchors.topMargin:    Math.max(snowPage.bannerViewHeight + 8, 34)
-            anchors.topMargin:    34
             anchors.bottomMargin: 16
             width:                96
             z:                    20
