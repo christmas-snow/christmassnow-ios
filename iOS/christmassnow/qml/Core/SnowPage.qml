@@ -1,9 +1,11 @@
 import QtQuick 2.9
+import QtQuick.Controls 2.2
 import QtQuick.Particles 2.0
 import QtMultimedia 5.9
 import QtSensors 5.9
 import SparkCreator 1.0
 
+import "Dialog"
 import "Snow"
 
 Item {
@@ -263,6 +265,7 @@ Item {
                 currentBackgroundNum = background_num;
             }
 
+            helpOnStartupTimer.restart();
             snowflakesCountTimer.restart();
             snowflakesAngleVelocityTimer.restart();
         }
@@ -276,6 +279,7 @@ Item {
                 currentBackgroundNum = background_num;
             }
 
+            helpOnStartupTimer.restart();
             snowflakesCountTimer.restart();
             snowflakesAngleVelocityTimer.restart();
         }
@@ -304,6 +308,22 @@ Item {
         particleSystem6.reset();
         particleSystem7.reset();
         particleSystem8.reset();
+    }
+
+    function captureImage() {
+        waitRectangle.visible = true;
+
+        if (!backgroundImage.grabToImage(function (result) {
+            result.saveToFile(ShareHelper.imageFilePath);
+
+            ShareHelper.showShareToView(ShareHelper.imageFilePath);
+
+            waitRectangle.visible = false;
+        })) {
+            console.log("grabToImage() failed");
+
+            waitRectangle.visible = false;
+        }
     }
 
     Audio {
@@ -564,7 +584,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       10
                 opacity: 0.75
                 system:  particleSystem1
                 source:  "qrc:/resources/images/snow/snowflake-1-big.png"
@@ -591,7 +611,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       10
                 opacity: 0.75
                 system:  particleSystem2
                 source:  "qrc:/resources/images/snow/snowflake-2-big.png"
@@ -618,7 +638,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       10
                 opacity: 0.75
                 system:  particleSystem3
                 source:  "qrc:/resources/images/snow/snowflake-3-big.png"
@@ -645,7 +665,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       10
                 opacity: 0.75
                 system:  particleSystem2
                 source:  "qrc:/resources/images/snow/snowflake-4-big.png"
@@ -672,7 +692,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       10
                 opacity: 0.75
                 system:  particleSystem5
                 source:  "qrc:/resources/images/snow/snowflake-1-small.png"
@@ -699,7 +719,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       10
                 opacity: 0.75
                 system:  particleSystem6
                 source:  "qrc:/resources/images/snow/snowflake-2-small.png"
@@ -726,7 +746,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       10
                 opacity: 0.75
                 system:  particleSystem7
                 source:  "qrc:/resources/images/snow/snowflake-3-small.png"
@@ -753,7 +773,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       10
                 opacity: 0.75
                 system:  particleSystem8
                 source:  "qrc:/resources/images/snow/snowflake-4-small.png"
@@ -763,7 +783,7 @@ Item {
         MouseArea {
             id:           snowfallMouseArea
             anchors.fill: parent
-            z:            10
+            z:            15
 
             property int pressedX:     0
             property int pressedY:     0
@@ -784,47 +804,87 @@ Item {
             }
         }
 
-        Image {
-            id:                 helpButtonImage
-            anchors.bottom:     parent.bottom
-            anchors.right:      parent.right
-            anchors.bottomMargin: 16
-            width:              48
-            height:             48
-            z:                  15
-            source:             "qrc:/resources/images/snow/button_help.png"
+        Row {
+            id:                       buttonImageRow
+            anchors.bottom:           parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            z:                        20
+            spacing:                  16
 
-            MouseArea {
-                id:           helpButtonMouseArea
-                anchors.fill: parent
+            Image {
+                id:     settingsButtonImage
+                width:  64
+                height: 64
+                source: "qrc:/resources/images/snow/button_settings.png"
 
-                onClicked: {
-                    mainPageStack.replace(helpPage);
+                MouseArea {
+                    id:           settingsButtonMouseArea
+                    anchors.fill: parent
+
+                    onClicked: {
+                        if (settingsListRectangle.visible) {
+                            settingsListRectangle.visible = false;
+                            settingsButtonImage.source    = "qrc:/resources/images/snow/button_settings.png";
+                        } else {
+                            settingsListRectangle.visible = true;
+                            settingsButtonImage.source    = "qrc:/resources/images/snow/button_settings_pressed.png";
+                        }
+                    }
                 }
             }
-        }
 
-        Image {
-            id:                 settingsButtonImage
-            anchors.bottom :    parent.bottom
-            anchors.left:       parent.left
-            anchors.bottomMargin: 16
-            width:              48
-            height:             48
-            z:                  15
-            source:             "qrc:/resources/images/snow/button_settings.png"
+            Image {
+                id:     captureImageButtonImage
+                width:  64
+                height: 64
+                source: "qrc:/resources/images/snow/button_capture_image.png"
 
-            MouseArea {
-                id:           settingsButtonMouseArea
-                anchors.fill: parent
+                MouseArea {
+                    id:           captureImageButtonMouseArea
+                    anchors.fill: parent
 
-                onClicked: {
-                    if (settingsListRectangle.visible) {
-                        settingsListRectangle.visible = false;
-                        settingsButtonImage.source    = "qrc:/resources/images/snow/button_settings.png";
-                    } else {
-                        settingsListRectangle.visible = true;
-                        settingsButtonImage.source    = "qrc:/resources/images/snow/button_settings_pressed.png";
+                    onClicked: {
+                        if (mainWindow.versionForKids) {
+                            parentalGateDialog.open("IMAGE");
+                        } else {
+                            snowPage.captureImage();
+                        }
+                    }
+                }
+            }
+
+            Image {
+                id:     captureGIFButtonImage
+                width:  64
+                height: 64
+                source: "qrc:/resources/images/snow/button_capture_gif.png"
+
+                MouseArea {
+                    id:           captureGIFButtonMouseArea
+                    anchors.fill: parent
+
+                    onClicked: {
+                        if (mainWindow.versionForKids) {
+                            parentalGateDialog.open("GIF");
+                        } else {
+                            captureGIFTimer.start();
+                        }
+                    }
+                }
+            }
+
+            Image {
+                id:     helpButtonImage
+                width:  64
+                height: 64
+                source: "qrc:/resources/images/snow/button_help.png"
+
+                MouseArea {
+                    id:           helpButtonMouseArea
+                    anchors.fill: parent
+
+                    onClicked: {
+                        helpDialog.open();
                     }
                 }
             }
@@ -833,11 +893,11 @@ Item {
         Rectangle {
             id:                   settingsListRectangle
             anchors.top:          parent.top
-            anchors.bottom:       settingsButtonImage.top
+            anchors.bottom:       buttonImageRow.top
             anchors.topMargin:    Math.max(snowPage.bannerViewHeight + 8, 34)
             anchors.bottomMargin: 16
             width:                96
-            z:                    20
+            z:                    25
             clip:                 true
             color:                "black"
             opacity:              0.75
@@ -867,19 +927,72 @@ Item {
                             anchors.fill: parent
 
                             onClicked: {
-                                snowPage.currentBackgroundNum = settingNumber;
-                                snowPage.bigSnowflakesCount   = snowPage.bigSnowflakesCountMax;
-                                snowPage.smallSnowflakesCount = snowPage.smallSnowflakesCountMax;
+                                if (mainWindow.fullVersion || settingNumber === 1) {
+                                    snowPage.currentBackgroundNum = settingNumber;
+                                    snowPage.bigSnowflakesCount   = snowPage.bigSnowflakesCountMax;
+                                    snowPage.smallSnowflakesCount = snowPage.smallSnowflakesCountMax;
 
-                                snowPage.resetParticleSystems();
+                                    snowPage.resetParticleSystems();
 
-                                mainWindow.setSetting("BackgroundNum", snowPage.currentBackgroundNum);
+                                    mainWindow.setSetting("BackgroundNum", snowPage.currentBackgroundNum);
+                                } else {
+                                    purchaseDialog.open();
+                                }
                             }
                         }
                     }
                 }
             }
         }
+
+        Rectangle {
+             id:           waitRectangle
+             anchors.fill: parent
+             z:            30
+             color:        "black"
+             opacity:      0.75
+             visible:      false
+
+             BusyIndicator {
+                 anchors.centerIn: parent
+                 running:          parent.visible
+             }
+
+             MouseArea {
+                 anchors.fill: parent
+             }
+         }
+    }
+
+    PurchaseDialog {
+        id: purchaseDialog
+        z:  35
+
+        onPurchaseFullVersion: {
+            mainWindow.purchaseFullVersion();
+        }
+
+        onRestorePurchases: {
+            mainWindow.restorePurchases();
+        }
+    }
+
+    ParentalGateDialog {
+        id: parentalGateDialog
+        z:  35
+
+        onPassAndCaptureImage: {
+            snowPage.captureImage();
+        }
+
+        onPassAndCaptureGIF: {
+            captureGIFTimer.start();
+        }
+    }
+
+    HelpDialog {
+        id: helpDialog
+        z:  35
     }
 
     Accelerometer {
@@ -906,6 +1019,67 @@ Item {
             lastReadingX = reading.x;
             lastReadingY = reading.y;
             lastReadingZ = reading.z;
+        }
+    }
+
+    Timer {
+        id:       helpOnStartupTimer
+        interval: 100
+
+        onTriggered: {
+            if (mainWindow.getSetting("ShowHelpOnStartup", "true") === "true") {
+                helpDialog.open();
+            }
+
+            mainWindow.setSetting("ShowHelpOnStartup", "false");
+        }
+    }
+
+    Timer {
+        id:               captureGIFTimer
+        interval:         200
+        repeat:           true
+        triggeredOnStart: true
+
+        property bool lastRunning: false
+
+        property int frameNumber:  0
+        property int framesCount:  5
+
+        onRunningChanged: {
+            if (running && !lastRunning) {
+                waitRectangle.visible = true;
+
+                frameNumber = 0;
+            } else if (!running && lastRunning) {
+                if (frameNumber >= framesCount) {
+                    if (GIFCreator.createGIF(framesCount, interval / 10)) {
+                        ShareHelper.showShareToView(GIFCreator.gifFilePath);
+                    } else {
+                        console.log("createGIF() failed");
+                    }
+                }
+
+                waitRectangle.visible = false;
+            }
+
+            lastRunning = running;
+        }
+
+        onTriggered: {
+            if (frameNumber < framesCount) {
+                var frame_number = frameNumber;
+
+                if (!backgroundImage.grabToImage(function (result) {
+                    result.saveToFile(GIFCreator.imageFilePathMask.arg(frame_number));
+                })) {
+                    console.log("grabToImage() failed for frame %1".arg(frame_number));
+                }
+
+                frameNumber = frameNumber + 1;
+            } else {
+                stop();
+            }
         }
     }
 

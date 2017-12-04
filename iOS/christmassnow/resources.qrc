@@ -1,5 +1,13 @@
 <RCC>
     <qresource prefix="/">
+        <file>resources/images/dialog/cancel.png</file>
+        <file>resources/images/dialog/help_dialog.png</file>
+        <file>resources/images/dialog/ok.png</file>
+        <file>resources/images/dialog/parental_gate_dialog.png</file>
+        <file>resources/images/dialog/purchase_dialog.png</file>
+        <file>resources/images/dialog/purchase_dialog_button.png</file>
+        <file>resources/images/dialog/purchase_dialog_purchase.png</file>
+        <file>resources/images/dialog/purchase_dialog_restore.png</file>
         <file>resources/images/snow/sparks/spark_1.png</file>
         <file>resources/images/snow/sparks/spark_2.png</file>
         <file>resources/images/snow/sparks/spark_3.png</file>
@@ -22,6 +30,8 @@
         <file>resources/images/snow/bg-3-3.png</file>
         <file>resources/images/snow/bg-3-4.png</file>
         <file>resources/images/snow/bg-3.png</file>
+        <file>resources/images/snow/button_capture_gif.png</file>
+        <file>resources/images/snow/button_capture_image.png</file>
         <file>resources/images/snow/button_help.png</file>
         <file>resources/images/snow/button_settings_pressed.png</file>
         <file>resources/images/snow/button_settings.png</file>
