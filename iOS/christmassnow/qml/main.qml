@@ -13,8 +13,7 @@ Window {
     visibility: Window.FullScreen
     visible:    true
 
-    property bool fullVersion:    false
-    property bool versionForKids: BuildSettingsScript.VERSION_FOR_KIDS
+    property bool fullVersion: false
 
     onFullVersionChanged: {
         setSetting("FullVersion", fullVersion ? "true" : "false");
@@ -144,7 +143,7 @@ Window {
     }
 
     Component.onCompleted: {
-        if (BuildSettingsScript.VERSION_FOR_KIDS) {
+        if (BuildSettingsScript.VERSION_FULL) {
             fullVersion = true;
         } else {
             fullVersion = (getSetting("FullVersion", "false") === "true");

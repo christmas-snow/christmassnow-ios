@@ -856,11 +856,7 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (mainWindow.versionForKids) {
-                            parentalGateDialog.open("IMAGE");
-                        } else {
-                            snowPage.captureImage();
-                        }
+                        snowPage.captureImage();
                     }
                 }
             }
@@ -876,11 +872,7 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (mainWindow.versionForKids) {
-                            parentalGateDialog.open("GIF");
-                        } else {
-                            captureGIFTimer.start();
-                        }
+                        captureGIFTimer.start();
                     }
                 }
             }
@@ -986,19 +978,6 @@ Item {
 
         onRestorePurchases: {
             mainWindow.restorePurchases();
-        }
-    }
-
-    ParentalGateDialog {
-        id: parentalGateDialog
-        z:  35
-
-        onPassAndCaptureImage: {
-            snowPage.captureImage();
-        }
-
-        onPassAndCaptureGIF: {
-            captureGIFTimer.start();
         }
     }
 

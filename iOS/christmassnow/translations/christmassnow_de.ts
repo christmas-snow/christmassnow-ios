@@ -5,29 +5,29 @@
     <name>HelpDialog</name>
     <message>
         <source>Christmas Snow Scenes</source>
-        <translation type="unfinished"></translation>
+        <translation>Weihnachtsschneeszenen</translation>
     </message>
     <message>
         <source>Have fun with a variety of Christmas Snow Scenes. Press Settings button to select a scene. Shake your phone to cause a snowfall. Control wind speed and direction by sliding your finger across a screen. Double tap on screen to hide buttons or show them again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Viel Spaß mit einer Vielzahl von Weihnachtsschneeszenen. Drücken Sie die Settings-Taste, um eine Szene auszuwählen. Schütteln Sie Ihr Telefon, um Schneefall zu verursachen. Kontrollieren Sie Windgeschwindigkeit und -richtung, indem Sie mit Ihrem Finger über einen Bildschirm fahren. Tippen Sie zweimal auf den Bildschirm, um Schaltflächen auszublenden oder sie erneut anzuzeigen.</translation>
     </message>
 </context>
 <context>
     <name>ParentalGateDialog</name>
     <message>
         <source>Slide with two fingers over this dialog to continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Schiebe mit zwei Fingern über diesen Dialog, um fortzufahren</translation>
     </message>
 </context>
 <context>
     <name>PurchaseDialog</name>
     <message>
         <source>Purchase full version</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollversion kaufen</translation>
     </message>
     <message>
         <source>Restore purchases</source>
-        <translation type="unfinished"></translation>
+        <translation>Käufe wiederherstellen</translation>
     </message>
 </context>
 </TS>
