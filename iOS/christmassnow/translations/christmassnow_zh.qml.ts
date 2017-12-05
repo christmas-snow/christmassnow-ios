@@ -15,14 +15,6 @@
     </message>
 </context>
 <context>
-    <name>ParentalGateDialog</name>
-    <message>
-        <location filename="../qml/Core/Dialog/ParentalGateDialog.qml" line="131"/>
-        <source>Slide with two fingers over this dialog to continue</source>
-        <translation>用两个手指滑过对话框继续</translation>
-    </message>
-</context>
-<context>
     <name>PurchaseDialog</name>
     <message>
         <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="162"/>

@@ -566,252 +566,252 @@ Item {
                     }
                 }
             }
-        }
 
-        ParticleSystem {
-            id:      particleSystem1
-            running: snowPage.pageActive
-        }
-
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem1
-            lifeSpan:     1000
-            size:         32
-            emitRate:     snowPage.bigSnowflakesCount
-
-            velocity: AngleDirection {
-                angle:              snowPage.snowflakesAngle
-                angleVariation:     30
-                magnitude:          snowPage.snowflakesVelocity
-                magnitudeVariation: 10
+            ParticleSystem {
+                id:      particleSystem1
+                running: snowPage.pageActive
             }
 
-            ImageParticle {
-                z:       10
-                opacity: 0.75
-                system:  particleSystem1
-                source:  "qrc:/resources/images/snow/snowflake-1-big.png"
-            }
-        }
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem1
+                lifeSpan:     1000
+                size:         32
+                emitRate:     snowPage.bigSnowflakesCount
 
-        ParticleSystem {
-            id:      particleSystem2
-            running: snowPage.pageActive
-        }
+                velocity: AngleDirection {
+                    angle:              snowPage.snowflakesAngle
+                    angleVariation:     30
+                    magnitude:          snowPage.snowflakesVelocity
+                    magnitudeVariation: 10
+                }
 
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem2
-            lifeSpan:     1000
-            size:         32
-            emitRate:     snowPage.bigSnowflakesCount
-
-            velocity: AngleDirection {
-                angle:              snowPage.snowflakesAngle
-                angleVariation:     30
-                magnitude:          snowPage.snowflakesVelocity
-                magnitudeVariation: 10
+                ImageParticle {
+                    z:       10
+                    opacity: 0.75
+                    system:  particleSystem1
+                    source:  "qrc:/resources/images/snow/snowflake-1-big.png"
+                }
             }
 
-            ImageParticle {
-                z:       10
-                opacity: 0.75
-                system:  particleSystem2
-                source:  "qrc:/resources/images/snow/snowflake-2-big.png"
-            }
-        }
-
-        ParticleSystem {
-            id:      particleSystem3
-            running: snowPage.pageActive
-        }
-
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem3
-            lifeSpan:     1000
-            size:         32
-            emitRate:     snowPage.bigSnowflakesCount
-
-            velocity: AngleDirection {
-                angle:              snowPage.snowflakesAngle
-                angleVariation:     30
-                magnitude:          snowPage.snowflakesVelocity
-                magnitudeVariation: 10
+            ParticleSystem {
+                id:      particleSystem2
+                running: snowPage.pageActive
             }
 
-            ImageParticle {
-                z:       10
-                opacity: 0.75
-                system:  particleSystem3
-                source:  "qrc:/resources/images/snow/snowflake-3-big.png"
-            }
-        }
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem2
+                lifeSpan:     1000
+                size:         32
+                emitRate:     snowPage.bigSnowflakesCount
 
-        ParticleSystem {
-            id:      particleSystem4
-            running: snowPage.pageActive
-        }
+                velocity: AngleDirection {
+                    angle:              snowPage.snowflakesAngle
+                    angleVariation:     30
+                    magnitude:          snowPage.snowflakesVelocity
+                    magnitudeVariation: 10
+                }
 
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem4
-            lifeSpan:     1000
-            size:         32
-            emitRate:     snowPage.bigSnowflakesCount
-
-            velocity: AngleDirection {
-                angle:              snowPage.snowflakesAngle
-                angleVariation:     30
-                magnitude:          snowPage.snowflakesVelocity
-                magnitudeVariation: 10
+                ImageParticle {
+                    z:       10
+                    opacity: 0.75
+                    system:  particleSystem2
+                    source:  "qrc:/resources/images/snow/snowflake-2-big.png"
+                }
             }
 
-            ImageParticle {
-                z:       10
-                opacity: 0.75
-                system:  particleSystem2
-                source:  "qrc:/resources/images/snow/snowflake-4-big.png"
-            }
-        }
-
-        ParticleSystem {
-            id:      particleSystem5
-            running: snowPage.pageActive
-        }
-
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem5
-            lifeSpan:     1000
-            size:         16
-            emitRate:     snowPage.smallSnowflakesCount
-
-            velocity: AngleDirection {
-                angle:              snowPage.snowflakesAngle
-                angleVariation:     30
-                magnitude:          snowPage.snowflakesVelocity
-                magnitudeVariation: 10
+            ParticleSystem {
+                id:      particleSystem3
+                running: snowPage.pageActive
             }
 
-            ImageParticle {
-                z:       10
-                opacity: 0.75
-                system:  particleSystem5
-                source:  "qrc:/resources/images/snow/snowflake-1-small.png"
-            }
-        }
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem3
+                lifeSpan:     1000
+                size:         32
+                emitRate:     snowPage.bigSnowflakesCount
 
-        ParticleSystem {
-            id:      particleSystem6
-            running: snowPage.pageActive
-        }
+                velocity: AngleDirection {
+                    angle:              snowPage.snowflakesAngle
+                    angleVariation:     30
+                    magnitude:          snowPage.snowflakesVelocity
+                    magnitudeVariation: 10
+                }
 
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem6
-            lifeSpan:     1000
-            size:         16
-            emitRate:     snowPage.smallSnowflakesCount
-
-            velocity: AngleDirection {
-                angle:              snowPage.snowflakesAngle
-                angleVariation:     30
-                magnitude:          snowPage.snowflakesVelocity
-                magnitudeVariation: 10
+                ImageParticle {
+                    z:       10
+                    opacity: 0.75
+                    system:  particleSystem3
+                    source:  "qrc:/resources/images/snow/snowflake-3-big.png"
+                }
             }
 
-            ImageParticle {
-                z:       10
-                opacity: 0.75
-                system:  particleSystem6
-                source:  "qrc:/resources/images/snow/snowflake-2-small.png"
-            }
-        }
-
-        ParticleSystem {
-            id:      particleSystem7
-            running: snowPage.pageActive
-        }
-
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem7
-            lifeSpan:     1000
-            size:         16
-            emitRate:     snowPage.smallSnowflakesCount
-
-            velocity: AngleDirection {
-                angle:              snowPage.snowflakesAngle
-                angleVariation:     30
-                magnitude:          snowPage.snowflakesVelocity
-                magnitudeVariation: 10
+            ParticleSystem {
+                id:      particleSystem4
+                running: snowPage.pageActive
             }
 
-            ImageParticle {
-                z:       10
-                opacity: 0.75
-                system:  particleSystem7
-                source:  "qrc:/resources/images/snow/snowflake-3-small.png"
-            }
-        }
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem4
+                lifeSpan:     1000
+                size:         32
+                emitRate:     snowPage.bigSnowflakesCount
 
-        ParticleSystem {
-            id:      particleSystem8
-            running: snowPage.pageActive
-        }
+                velocity: AngleDirection {
+                    angle:              snowPage.snowflakesAngle
+                    angleVariation:     30
+                    magnitude:          snowPage.snowflakesVelocity
+                    magnitudeVariation: 10
+                }
 
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem8
-            lifeSpan:     1000
-            size:         16
-            emitRate:     snowPage.smallSnowflakesCount
-
-            velocity: AngleDirection {
-                angle:              snowPage.snowflakesAngle
-                angleVariation:     30
-                magnitude:          snowPage.snowflakesVelocity
-                magnitudeVariation: 10
+                ImageParticle {
+                    z:       10
+                    opacity: 0.75
+                    system:  particleSystem2
+                    source:  "qrc:/resources/images/snow/snowflake-4-big.png"
+                }
             }
 
-            ImageParticle {
-                z:       10
-                opacity: 0.75
-                system:  particleSystem8
-                source:  "qrc:/resources/images/snow/snowflake-4-small.png"
-            }
-        }
-
-        MouseArea {
-            id:           snowfallMouseArea
-            anchors.fill: parent
-            z:            15
-
-            property int pressedX:     0
-            property int pressedY:     0
-
-            property real pressedTime: (new Date).getTime()
-
-            onPositionChanged: {
-                var velocity = Math.sqrt(Math.pow(mouse.x - pressedX, 2) + Math.pow(mouse.y - pressedY, 2)) * 1000 / ((new Date).getTime() - pressedTime);
-
-                snowPage.snowflakesAngle    = (Math.atan2(mouse.y - pressedY, mouse.x - pressedX) * 180) / Math.PI;
-                snowPage.snowflakesVelocity = velocity < snowPage.snowflakesVelocityMax ? velocity : snowPage.snowflakesVelocityMax;
+            ParticleSystem {
+                id:      particleSystem5
+                running: snowPage.pageActive
             }
 
-            onPressed: {
-                pressedX    = mouse.x;
-                pressedY    = mouse.y;
-                pressedTime = (new Date).getTime();
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem5
+                lifeSpan:     1000
+                size:         16
+                emitRate:     snowPage.smallSnowflakesCount
+
+                velocity: AngleDirection {
+                    angle:              snowPage.snowflakesAngle
+                    angleVariation:     30
+                    magnitude:          snowPage.snowflakesVelocity
+                    magnitudeVariation: 10
+                }
+
+                ImageParticle {
+                    z:       10
+                    opacity: 0.75
+                    system:  particleSystem5
+                    source:  "qrc:/resources/images/snow/snowflake-1-small.png"
+                }
             }
 
-            onDoubleClicked: {
-                if (buttonImageRow.visible && !settingsListRectangle.visible) {
-                    buttonImageRow.visible = false;
-                } else {
-                    buttonImageRow.visible = true;
+            ParticleSystem {
+                id:      particleSystem6
+                running: snowPage.pageActive
+            }
+
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem6
+                lifeSpan:     1000
+                size:         16
+                emitRate:     snowPage.smallSnowflakesCount
+
+                velocity: AngleDirection {
+                    angle:              snowPage.snowflakesAngle
+                    angleVariation:     30
+                    magnitude:          snowPage.snowflakesVelocity
+                    magnitudeVariation: 10
+                }
+
+                ImageParticle {
+                    z:       10
+                    opacity: 0.75
+                    system:  particleSystem6
+                    source:  "qrc:/resources/images/snow/snowflake-2-small.png"
+                }
+            }
+
+            ParticleSystem {
+                id:      particleSystem7
+                running: snowPage.pageActive
+            }
+
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem7
+                lifeSpan:     1000
+                size:         16
+                emitRate:     snowPage.smallSnowflakesCount
+
+                velocity: AngleDirection {
+                    angle:              snowPage.snowflakesAngle
+                    angleVariation:     30
+                    magnitude:          snowPage.snowflakesVelocity
+                    magnitudeVariation: 10
+                }
+
+                ImageParticle {
+                    z:       10
+                    opacity: 0.75
+                    system:  particleSystem7
+                    source:  "qrc:/resources/images/snow/snowflake-3-small.png"
+                }
+            }
+
+            ParticleSystem {
+                id:      particleSystem8
+                running: snowPage.pageActive
+            }
+
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem8
+                lifeSpan:     1000
+                size:         16
+                emitRate:     snowPage.smallSnowflakesCount
+
+                velocity: AngleDirection {
+                    angle:              snowPage.snowflakesAngle
+                    angleVariation:     30
+                    magnitude:          snowPage.snowflakesVelocity
+                    magnitudeVariation: 10
+                }
+
+                ImageParticle {
+                    z:       10
+                    opacity: 0.75
+                    system:  particleSystem8
+                    source:  "qrc:/resources/images/snow/snowflake-4-small.png"
+                }
+            }
+
+            MouseArea {
+                id:           snowfallMouseArea
+                anchors.fill: parent
+                z:            15
+
+                property int pressedX:     0
+                property int pressedY:     0
+
+                property real pressedTime: (new Date).getTime()
+
+                onPositionChanged: {
+                    var velocity = Math.sqrt(Math.pow(mouse.x - pressedX, 2) + Math.pow(mouse.y - pressedY, 2)) * 1000 / ((new Date).getTime() - pressedTime);
+
+                    snowPage.snowflakesAngle    = (Math.atan2(mouse.y - pressedY, mouse.x - pressedX) * 180) / Math.PI;
+                    snowPage.snowflakesVelocity = velocity < snowPage.snowflakesVelocityMax ? velocity : snowPage.snowflakesVelocityMax;
+                }
+
+                onPressed: {
+                    pressedX    = mouse.x;
+                    pressedY    = mouse.y;
+                    pressedTime = (new Date).getTime();
+                }
+
+                onDoubleClicked: {
+                    if (buttonImageRow.visible && !settingsListRectangle.visible) {
+                        buttonImageRow.visible = false;
+                    } else {
+                        buttonImageRow.visible = true;
+                    }
                 }
             }
         }

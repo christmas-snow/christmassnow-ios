@@ -13,13 +13,6 @@
     </message>
 </context>
 <context>
-    <name>ParentalGateDialog</name>
-    <message>
-        <source>Slide with two fingers over this dialog to continue</source>
-        <translation>用两个手指滑过对话框继续</translation>
-    </message>
-</context>
-<context>
     <name>PurchaseDialog</name>
     <message>
         <source>Purchase full version</source>
