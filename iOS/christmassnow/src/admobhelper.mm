@@ -7,8 +7,8 @@
 
 #include "admobhelper.h"
 
-const QString AdMobHelper::ADMOB_APP_ID              ("ca-app-pub-2455088855015693~2566748048");
-const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID  ("ca-app-pub-3940256099942544/2934735716");
+const QString AdMobHelper::ADMOB_APP_ID              ("ca-app-pub-2455088855015693~4469017889");
+const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID  ("ca-app-pub-2455088855015693/9661812425");
 const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
 
 AdMobHelper *AdMobHelper::Instance = NULL;
