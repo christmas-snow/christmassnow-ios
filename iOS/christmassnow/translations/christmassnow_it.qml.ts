@@ -6,12 +6,12 @@
     <message>
         <location filename="../qml/Core/Dialog/HelpDialog.qml" line="114"/>
         <source>Christmas Snow Scenes</source>
-        <translation type="unfinished"></translation>
+        <translation>Scene di neve di Natale</translation>
     </message>
     <message>
         <location filename="../qml/Core/Dialog/HelpDialog.qml" line="115"/>
         <source>Have fun with a variety of Christmas Snow Scenes. Press Settings button to select a scene. Shake your phone to cause a snowfall. Control wind speed and direction by sliding your finger across a screen. Double tap on screen to hide buttons or show them again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Divertiti con una varietà di scene sulla neve di Natale. Premere il pulsante Impostazioni per selezionare una scena. Scuoti il telefono per provocare una nevicata. Controlla la velocità e la direzione del vento facendo scorrere il dito su uno schermo. Tocca due volte lo schermo per nascondere i pulsanti o mostrarli di nuovo.</translation>
     </message>
 </context>
 <context>
@@ -19,12 +19,12 @@
     <message>
         <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="162"/>
         <source>Purchase full version</source>
-        <translation type="unfinished"></translation>
+        <translation>Acquista la versione completa</translation>
     </message>
     <message>
         <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="230"/>
         <source>Restore purchases</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristinare gli acquisti</translation>
     </message>
 </context>
 </TS>
