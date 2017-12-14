@@ -4,5 +4,7 @@
         <file alias="christmassnow_de.qm">translations/christmassnow_de.qm</file>
         <file alias="christmassnow_fr.qm">translations/christmassnow_fr.qm</file>
         <file alias="christmassnow_zh.qm">translations/christmassnow_zh.qm</file>
+        <file alias="christmassnow_es.qm">translations/christmassnow_es.qm</file>
+        <file alias="christmassnow_it.qm">translations/christmassnow_it.qm</file>
     </qresource>
 </RCC>
