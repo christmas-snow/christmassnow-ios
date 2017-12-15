@@ -303,6 +303,12 @@ Item {
         }
     }
 
+    function shareToViewCompleted() {
+        if (typeof(snowPage) !== "undefined" && snowPage !== null) {
+            StoreHelper.requestReview();
+        }
+    }
+
     function resetParticleSystems() {
         particleSystem1.reset();
         particleSystem2.reset();
@@ -1105,6 +1111,8 @@ Item {
     }
 
     Component.onCompleted: {
+        ShareHelper.shareToViewCompleted.connect(shareToViewCompleted);
+
         settingsListModel.clear();
 
         for (var i = 1; i <= snowPage.maxBackgroundNum; i++) {
