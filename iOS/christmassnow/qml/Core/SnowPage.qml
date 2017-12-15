@@ -303,12 +303,6 @@ Item {
         }
     }
 
-    function shareToViewCompleted() {
-        if (typeof(snowPage) !== "undefined" && snowPage !== null) {
-            StoreHelper.requestReview();
-        }
-    }
-
     function resetParticleSystems() {
         particleSystem1.reset();
         particleSystem2.reset();
@@ -334,6 +328,10 @@ Item {
 
             waitRectangle.visible = false;
         }
+    }
+
+    function shareToViewCompleted() {
+        StoreHelper.requestReview();
     }
 
     Audio {
