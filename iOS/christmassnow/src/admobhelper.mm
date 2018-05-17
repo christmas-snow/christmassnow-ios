@@ -19,13 +19,12 @@ AdMobHelper *AdMobHelper::Instance = NULL;
 - (void)dealloc;
 - (void)loadAd;
 
-@property (nonatomic, retain) GADBannerView *BannerView;
-
 @end
 
 @implementation BannerViewDelegate
-
-@synthesize BannerView;
+{
+    GADBannerView *BannerView;
+}
 
 - (id)init
 {
@@ -87,7 +86,7 @@ AdMobHelper *AdMobHelper::Instance = NULL;
         request.testDevices = @[ AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString() ];
     }
 
-    [self.BannerView loadRequest:request];
+    [BannerView loadRequest:request];
 }
 
 - (void)adViewDidReceiveAd:(GADBannerView *)adView
