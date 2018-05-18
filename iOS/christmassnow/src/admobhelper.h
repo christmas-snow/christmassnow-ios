@@ -28,7 +28,7 @@ public:
     Q_INVOKABLE void showBannerView();
     Q_INVOKABLE void hideBannerView();
 
-    static void setBannerViewHeight(const int &height);
+    static void setBannerViewHeight(int height);
 
 signals:
     void bannerViewHeightChanged(int bannerViewHeight);

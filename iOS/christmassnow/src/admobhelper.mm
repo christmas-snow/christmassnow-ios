@@ -185,7 +185,7 @@ void AdMobHelper::hideBannerView()
     }
 }
 
-void AdMobHelper::setBannerViewHeight(const int &height)
+void AdMobHelper::setBannerViewHeight(int height)
 {
     Instance->BannerViewHeight = height;
 

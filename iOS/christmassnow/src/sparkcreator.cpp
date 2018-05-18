@@ -18,7 +18,7 @@ int SparkCreator::minSparksCount() const
     return MinSparksCount;
 }
 
-void SparkCreator::setMinSparksCount(const int &count)
+void SparkCreator::setMinSparksCount(int count)
 {
     MinSparksCount = count;
 }
@@ -28,7 +28,7 @@ int SparkCreator::maxSparksCount() const
     return MaxSparksCount;
 }
 
-void SparkCreator::setMaxSparksCount(const int &count)
+void SparkCreator::setMaxSparksCount(int count)
 {
     MaxSparksCount = count;
 }
@@ -38,7 +38,7 @@ QString SparkCreator::imageFilePath() const
     return ImageFilePath;
 }
 
-void SparkCreator::setImageFilePath(const QString &file_path)
+void SparkCreator::setImageFilePath(QString file_path)
 {
     ImageFilePath = file_path;
 
