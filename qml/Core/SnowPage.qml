@@ -259,7 +259,7 @@ Item {
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
-            var background_num = mainWindow.getSetting("BackgroundNum", 1);
+            var background_num = parseInt(mainWindow.getSetting("BackgroundNum", 1), 10);
 
             if (background_num <= maxBackgroundNum) {
                 currentBackgroundNum = background_num;
@@ -275,7 +275,7 @@ Item {
 
     onPageActiveChanged: {
         if (appInForeground && pageActive) {
-            var background_num = mainWindow.getSetting("BackgroundNum", 1);
+            var background_num = parseInt(mainWindow.getSetting("BackgroundNum", 1), 10);
 
             if (background_num <= maxBackgroundNum) {
                 currentBackgroundNum = background_num;
@@ -942,7 +942,7 @@ Item {
 
                                     snowPage.resetParticleSystems();
 
-                                    mainWindow.setSetting("BackgroundNum", snowPage.currentBackgroundNum);
+                                    mainWindow.setSetting("BackgroundNum", snowPage.currentBackgroundNum.toString(10));
                                 } else {
                                     purchaseDialog.open();
                                 }
