@@ -1,8 +1,9 @@
 #ifndef SPARKCREATOR_H
 #define SPARKCREATOR_H
 
-#include <QObject>
-#include <QVariant>
+#include <QtCore/QObject>
+#include <QtCore/QString>
+#include <QtCore/QVariant>
 
 class SparkCreator : public QObject
 {

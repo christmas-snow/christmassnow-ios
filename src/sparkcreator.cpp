@@ -1,3 +1,4 @@
+#include <QtCore/QtGlobal>
 #include <QtCore/QDateTime>
 #include <QtGui/QColor>
 #include <QtGui/QImage>
@@ -73,8 +74,8 @@ void SparkCreator::createRandomSparks()
 {
     QVariantList sparks;
 
-    for (int i = 0; i < MinSparksCount + qrand() * ((float)(MaxSparksCount - MinSparksCount) / RAND_MAX); i++) {
-        sparks.append(snowPixels.at(qrand() * ((float)(snowPixels.count() - 1) / RAND_MAX)));
+    for (int i = 0; i < MinSparksCount + qrand() * ((qreal)(MaxSparksCount - MinSparksCount) / RAND_MAX); i++) {
+        sparks.append(snowPixels.at(qrand() * ((qreal)(snowPixels.count() - 1) / RAND_MAX)));
     }
 
     emit randomSparksCreated(sparks);
