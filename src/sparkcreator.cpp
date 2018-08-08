@@ -1,4 +1,5 @@
 #include <QtCore/QtGlobal>
+#include <QtCore/QtMath>
 #include <QtCore/QDateTime>
 #include <QtGui/QColor>
 #include <QtGui/QImage>
@@ -11,7 +12,7 @@ SparkCreator::SparkCreator(QObject *parent) : QObject(parent)
     MaxSparksCount = 0;
     ImageFilePath  = "";
 
-    qsrand((uint)QDateTime::currentMSecsSinceEpoch());
+    qsrand(static_cast<uint>(QDateTime::currentMSecsSinceEpoch()));
 }
 
 int SparkCreator::minSparksCount() const
@@ -74,8 +75,8 @@ void SparkCreator::createRandomSparks()
 {
     QVariantList sparks;
 
-    for (int i = 0; i < MinSparksCount + qrand() * ((qreal)(MaxSparksCount - MinSparksCount) / RAND_MAX); i++) {
-        sparks.append(snowPixels.at(qrand() * ((qreal)(snowPixels.count() - 1) / RAND_MAX)));
+    for (int i = 0; i < MinSparksCount + qrand() * (static_cast<qreal>(MaxSparksCount - MinSparksCount) / RAND_MAX); i++) {
+        sparks.append(snowPixels.at(qFloor(qrand() * (static_cast<qreal>(snowPixels.count() - 1) / RAND_MAX))));
     }
 
     emit randomSparksCreated(sparks);
