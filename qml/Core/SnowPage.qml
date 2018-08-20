@@ -792,16 +792,20 @@ Item {
                 anchors.fill: parent
                 z:            15
 
-                property int pressedX:     0
-                property int pressedY:     0
+                property int pressedX:       0
+                property int pressedY:       0
 
-                property real pressedTime: (new Date).getTime()
+                property double pressedTime: (new Date).getTime()
 
                 onPositionChanged: {
-                    var velocity = Math.sqrt(Math.pow(mouse.x - pressedX, 2) + Math.pow(mouse.y - pressedY, 2)) * 1000 / ((new Date).getTime() - pressedTime);
+                    var denom = (new Date).getTime() - pressedTime;
 
-                    snowPage.snowflakesAngle    = (Math.atan2(mouse.y - pressedY, mouse.x - pressedX) * 180) / Math.PI;
-                    snowPage.snowflakesVelocity = velocity < snowPage.snowflakesVelocityMax ? velocity : snowPage.snowflakesVelocityMax;
+                    if (denom > 0) {
+                        var velocity = Math.sqrt(Math.pow(mouse.x - pressedX, 2) + Math.pow(mouse.y - pressedY, 2)) * 1000 / denom;
+
+                        snowPage.snowflakesAngle    = (Math.atan2(mouse.y - pressedY, mouse.x - pressedX) * 180) / Math.PI;
+                        snowPage.snowflakesVelocity = velocity < snowPage.snowflakesVelocityMax ? velocity : snowPage.snowflakesVelocityMax;
+                    }
                 }
 
                 onPressed: {
