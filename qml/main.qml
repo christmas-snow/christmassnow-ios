@@ -10,6 +10,7 @@ import "BuildSettings.js" as BuildSettingsScript
 
 Window {
     id:         mainWindow
+    title:      qsTr("Snow Scenes")
     visibility: Window.FullScreen
     visible:    true
 
