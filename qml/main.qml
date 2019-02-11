@@ -4,8 +4,6 @@ import QtQuick.Controls 2.2
 import QtQuick.LocalStorage 2.0
 import QtPurchasing 1.0
 
-import "Core"
-
 import "BuildSettings.js" as BuildSettingsScript
 
 Window {
@@ -130,10 +128,6 @@ Window {
         }
     }
 
-    SnowPage {
-        id: snowPage
-    }
-
     MouseArea {
         id:           screenLockMouseArea
         anchors.fill: parent
@@ -148,6 +142,12 @@ Window {
             fullVersion = (getSetting("FullVersion", "false") === "true");
         }
 
-        mainStackView.push(snowPage);
+        var component = Qt.createComponent("Core/SnowPage.qml");
+
+        if (component.status === Component.Ready) {
+            mainStackView.push(component);
+        } else {
+            console.log(component.errorString());
+        }
     }
 }
