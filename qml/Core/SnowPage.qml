@@ -953,17 +953,16 @@ Item {
         }
 
         Rectangle {
-            id:                   settingsListRectangle
-            anchors.top:          parent.top
-            anchors.bottom:       buttonImageRow.top
-            anchors.topMargin:    Math.max(snowPage.bannerViewHeight + 8, 34)
-            anchors.bottomMargin: 16
-            width:                96
-            z:                    25
-            clip:                 true
-            color:                "black"
-            opacity:              0.75
-            visible:              false
+            id:                     settingsListRectangle
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left:           parent.left
+            width:                  96
+            height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
+            z:                      25
+            clip:                   true
+            color:                  "black"
+            opacity:                0.75
+            visible:                false
 
             ListView {
                 id:           settingsListView
