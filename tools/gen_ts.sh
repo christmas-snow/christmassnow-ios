@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATH=$PATH:~/Qt/5.9.1/ios/bin
+PATH=$PATH:~/Qt/5.12.1/ios/bin
 
 lupdate ../christmassnow.pro -ts ../translations/christmassnow_ru.src.ts
 lupdate ../qml               -ts ../translations/christmassnow_ru.qml.ts
