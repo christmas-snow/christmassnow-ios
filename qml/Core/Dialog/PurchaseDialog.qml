@@ -67,69 +67,15 @@ MouseArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
-        width:            calculateWidth (sourceSize.width, sourceSize.height, parent.width - 72, parent.height - 72)
-        height:           calculateHeight(sourceSize.width, sourceSize.height, parent.width - 72, parent.height - 72)
         source:           "qrc:/resources/images/dialog/purchase_dialog.png"
-        fillMode:         Image.PreserveAspectFit
-
-        function calculateWidth(src_width, src_height, dst_width, dst_height) {
-            if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
-                if (dst_width / dst_height > src_width / src_height) {
-                    return src_width * dst_height / src_height;
-                } else {
-                    return dst_width;
-                }
-            } else {
-                return 0;
-            }
-        }
-
-        function calculateHeight(src_width, src_height, dst_width, dst_height) {
-            if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
-                if (dst_width / dst_height > src_width / src_height) {
-                    return dst_height;
-                } else {
-                    return src_height * dst_width / src_width;
-                }
-            } else {
-                return 0;
-            }
-        }
 
         Column {
             anchors.centerIn: parent
             spacing:          8
 
             Image {
-                id:       purchaseFullVersionButtonImage
-                width:    calculateWidth (sourceSize.width, sourceSize.height, dialogImage.width - 24, dialogImage.height - 24)
-                height:   calculateHeight(sourceSize.width, sourceSize.height, dialogImage.width - 24, dialogImage.height - 24)
-                source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
-                fillMode: Image.PreserveAspectFit
-
-                function calculateWidth(src_width, src_height, dst_width, dst_height) {
-                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
-                        if (dst_width / dst_height > src_width / src_height) {
-                            return src_width * dst_height / src_height;
-                        } else {
-                            return dst_width;
-                        }
-                    } else {
-                        return 0;
-                    }
-                }
-
-                function calculateHeight(src_width, src_height, dst_width, dst_height) {
-                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
-                        if (dst_width / dst_height > src_width / src_height) {
-                            return dst_height;
-                        } else {
-                            return src_height * dst_width / src_width;
-                        }
-                    } else {
-                        return 0;
-                    }
-                }
+                id:     purchaseFullVersionButtonImage
+                source: "qrc:/resources/images/dialog/purchase_dialog_button.png"
 
                 MouseArea {
                     anchors.fill: parent
@@ -176,35 +122,8 @@ MouseArea {
             }
 
             Image {
-                id:       restorePurchasesButtonImage
-                width:    calculateWidth (sourceSize.width, sourceSize.height, dialogImage.width - 24, dialogImage.height - 24)
-                height:   calculateHeight(sourceSize.width, sourceSize.height, dialogImage.width - 24, dialogImage.height - 24)
-                source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
-                fillMode: Image.PreserveAspectFit
-
-                function calculateWidth(src_width, src_height, dst_width, dst_height) {
-                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
-                        if (dst_width / dst_height > src_width / src_height) {
-                            return src_width * dst_height / src_height;
-                        } else {
-                            return dst_width;
-                        }
-                    } else {
-                        return 0;
-                    }
-                }
-
-                function calculateHeight(src_width, src_height, dst_width, dst_height) {
-                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
-                        if (dst_width / dst_height > src_width / src_height) {
-                            return dst_height;
-                        } else {
-                            return src_height * dst_width / src_width;
-                        }
-                    } else {
-                        return 0;
-                    }
-                }
+                id:     restorePurchasesButtonImage
+                source: "qrc:/resources/images/dialog/purchase_dialog_button.png"
 
                 MouseArea {
                     anchors.fill: parent
