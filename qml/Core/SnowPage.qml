@@ -877,6 +877,7 @@ Item {
             id:                       buttonImageRow
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin:     30
             z:                        20
             spacing:                  16
 
