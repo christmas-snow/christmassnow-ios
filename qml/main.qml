@@ -23,6 +23,8 @@ Window {
             } else {
                 AdMobHelper.showBannerView();
             }
+        } else {
+            AdMobHelper.hideBannerView();
         }
     }
 
@@ -101,19 +103,11 @@ Window {
 
                 if (item !== null) {
                     item.focus = false;
-
-                    if (item.hasOwnProperty("pageActive")) {
-                        item.pageActive = false;
-                    }
                 }
             }
 
             if (depth > 0) {
                 currentItem.forceActiveFocus();
-
-                if (currentItem.hasOwnProperty("pageActive")) {
-                    currentItem.pageActive = true;
-                }
 
                 if (currentItem.hasOwnProperty("bannerViewHeight")) {
                     if (mainWindow.fullVersion) {
@@ -124,6 +118,8 @@ Window {
                 } else {
                     AdMobHelper.hideBannerView();
                 }
+            } else {
+                AdMobHelper.hideBannerView();
             }
         }
     }

@@ -12,8 +12,8 @@ Item {
     id:    snowPage
     state: "snowLevel0"
 
-    property bool appInForeground:        Qt.application.active
-    property bool pageActive:             false
+    property bool appInForeground:        Qt.application.state === Qt.ApplicationActive
+    property bool pageActive:             StackView.status === StackView.Active
 
     property int bannerViewHeight:        AdMobHelper.bannerViewHeight
     property int currentBackgroundNum:    1
