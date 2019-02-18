@@ -17,14 +17,22 @@
 <context>
     <name>PurchaseDialog</name>
     <message>
-        <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="162"/>
+        <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="165"/>
         <source>Purchase full version</source>
         <translation>Купить полную версию</translation>
     </message>
     <message>
-        <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="230"/>
+        <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="240"/>
         <source>Restore purchases</source>
         <translation>Восстановить покупки</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../qml/main.qml" line="11"/>
+        <source>Snow Scenes</source>
+        <translation>Снег</translation>
     </message>
 </context>
 </TS>

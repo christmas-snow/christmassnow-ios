@@ -23,4 +23,11 @@
         <translation>Ripristinare gli acquisti</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Snow Scenes</source>
+        <translation>La Neve</translation>
+    </message>
+</context>
 </TS>

@@ -23,4 +23,11 @@
         <translation>恢复购买</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Snow Scenes</source>
+        <translation>雪</translation>
+    </message>
+</context>
 </TS>

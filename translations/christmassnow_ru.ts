@@ -23,4 +23,11 @@
         <translation>Восстановить покупки</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Snow Scenes</source>
+        <translation>Снег</translation>
+    </message>
+</context>
 </TS>
