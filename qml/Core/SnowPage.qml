@@ -39,26 +39,31 @@ Item {
 
             PropertyChanges {
                 target:  snowImage1
+                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage2
+                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage3
+                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage4
+                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage5
+                enabled: false
                 visible: false
             }
 
@@ -69,26 +74,31 @@ Item {
 
             PropertyChanges {
                 target:  snowImage1
+                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage2
+                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage3
+                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage4
+                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage5
+                enabled: false
                 visible: false
             }
         },
@@ -98,26 +108,31 @@ Item {
 
             PropertyChanges {
                 target:  snowImage1
+                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage2
+                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage3
+                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage4
+                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage5
+                enabled: false
                 visible: false
             }
         },
@@ -127,26 +142,31 @@ Item {
 
             PropertyChanges {
                 target:  snowImage1
+                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage2
+                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage3
+                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage4
+                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage5
+                enabled: false
                 visible: false
             }
         },
@@ -156,26 +176,31 @@ Item {
 
             PropertyChanges {
                 target:  snowImage1
+                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage2
+                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage3
+                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage4
+                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage5
+                enabled: true
                 visible: true
             }
         }
@@ -347,10 +372,10 @@ Item {
     }
 
     SparkCreator {
-        id:                     sparkCreator
-        minSparksCount:         50
-        maxSparksCount:         100
-        imageFilePath:          ":/resources/images/snow/bg-%1-4.png".arg(snowPage.currentBackgroundNum)
+        id:             sparkCreator
+        minSparksCount: 50
+        maxSparksCount: 100
+        imageFilePath:  ":/resources/images/snow/bg-%1-4.png".arg(snowPage.currentBackgroundNum)
 
         onError: {
             console.log(errorString);
@@ -396,28 +421,32 @@ Item {
         Image {
             id:               backgroundImage
             anchors.centerIn: parent
-            width:            parent.width
-            height:           parent.height
+            width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
+            height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
             source:           "qrc:/resources/images/snow/bg-%1.png".arg(snowPage.currentBackgroundNum)
             fillMode:         Image.PreserveAspectCrop
 
-            property bool geometrySettled: false
-
-            onPaintedWidthChanged: {
-                if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                    geometrySettled = true;
-
-                    width  = paintedWidth;
-                    height = paintedHeight;
+            function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                    if (dst_width / dst_height < src_width / src_height) {
+                        return src_width * dst_height / src_height;
+                    } else {
+                        return dst_width;
+                    }
+                } else {
+                    return 0;
                 }
             }
 
-            onPaintedHeightChanged: {
-                if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                    geometrySettled = true;
-
-                    width  = paintedWidth;
-                    height = paintedHeight;
+            function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                    if (dst_width / dst_height < src_width / src_height) {
+                        return dst_height;
+                    } else {
+                        return src_height * dst_width / src_width;
+                    }
+                } else {
+                    return 0;
                 }
             }
 
@@ -425,28 +454,32 @@ Item {
                 id:               snowImage1
                 anchors.centerIn: parent
                 z:                1
-                width:            parent.width
-                height:           parent.height
+                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 source:           "qrc:/resources/images/snow/bg-%1-1.png".arg(snowPage.currentBackgroundNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                property bool geometrySettled: false
-
-                onPaintedWidthChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return src_width * dst_height / src_height;
+                        } else {
+                            return dst_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
 
-                onPaintedHeightChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return dst_height;
+                        } else {
+                            return src_height * dst_width / src_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
             }
@@ -455,28 +488,32 @@ Item {
                 id:               snowImage2
                 anchors.centerIn: parent
                 z:                2
-                width:            parent.width
-                height:           parent.height
+                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 source:           "qrc:/resources/images/snow/bg-%1-2.png".arg(snowPage.currentBackgroundNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                property bool geometrySettled: false
-
-                onPaintedWidthChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return src_width * dst_height / src_height;
+                        } else {
+                            return dst_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
 
-                onPaintedHeightChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return dst_height;
+                        } else {
+                            return src_height * dst_width / src_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
             }
@@ -485,28 +522,32 @@ Item {
                 id:               snowImage3
                 anchors.centerIn: parent
                 z:                3
-                width:            parent.width
-                height:           parent.height
+                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 source:           "qrc:/resources/images/snow/bg-%1-3.png".arg(snowPage.currentBackgroundNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                property bool geometrySettled: false
-
-                onPaintedWidthChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return src_width * dst_height / src_height;
+                        } else {
+                            return dst_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
 
-                onPaintedHeightChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return dst_height;
+                        } else {
+                            return src_height * dst_width / src_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
             }
@@ -515,28 +556,32 @@ Item {
                 id:               snowImage4
                 anchors.centerIn: parent
                 z:                4
-                width:            parent.width
-                height:           parent.height
+                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 source:           "qrc:/resources/images/snow/bg-%1-4.png".arg(snowPage.currentBackgroundNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                property bool geometrySettled: false
-
-                onPaintedWidthChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return src_width * dst_height / src_height;
+                        } else {
+                            return dst_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
 
-                onPaintedHeightChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return dst_height;
+                        } else {
+                            return src_height * dst_width / src_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
             }
@@ -545,28 +590,32 @@ Item {
                 id:               snowImage5
                 anchors.centerIn: parent
                 z:                6
-                width:            parent.width
-                height:           parent.height
+                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 source:           "qrc:/resources/images/snow/bg-%1-4.png".arg(snowPage.currentBackgroundNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                property bool geometrySettled: false
-
-                onPaintedWidthChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return src_width * dst_height / src_height;
+                        } else {
+                            return dst_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
 
-                onPaintedHeightChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return dst_height;
+                        } else {
+                            return src_height * dst_width / src_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
             }
