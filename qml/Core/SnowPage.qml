@@ -968,40 +968,39 @@ Item {
                 id:           settingsListView
                 anchors.fill: parent
                 orientation:  ListView.Vertical
-                model:        settingsVisualDataModel
 
-                VisualDataModel {
-                    id: settingsVisualDataModel
+                model: ListModel {
+                    id: settingsListModel
+                }
 
-                    model: ListModel {
-                        id: settingsListModel
-                    }
+                delegate: Image {
+                    id:     settingsItemDelegate
+                    width:  settingsListRectangle.width
+                    height: sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
+                    source: "qrc:/resources/images/snow/bg-%1.png".arg(settingNumber)
 
-                    delegate: Image {
-                        id:     settingsItemDelegate
-                        width:  settingsListRectangle.width
-                        height: sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
-                        source: "qrc:/resources/images/snow/bg-%1.png".arg(settingNumber)
+                    MouseArea {
+                        id:           settingsItemMouseArea
+                        anchors.fill: parent
 
-                        MouseArea {
-                            id:           settingsItemMouseArea
-                            anchors.fill: parent
+                        onClicked: {
+                            if (mainWindow.fullVersion || settingNumber === 1) {
+                                snowPage.currentBackgroundNum = settingNumber;
+                                snowPage.bigSnowflakesCount   = snowPage.bigSnowflakesCountMax;
+                                snowPage.smallSnowflakesCount = snowPage.smallSnowflakesCountMax;
 
-                            onClicked: {
-                                if (mainWindow.fullVersion || settingNumber === 1) {
-                                    snowPage.currentBackgroundNum = settingNumber;
-                                    snowPage.bigSnowflakesCount   = snowPage.bigSnowflakesCountMax;
-                                    snowPage.smallSnowflakesCount = snowPage.smallSnowflakesCountMax;
+                                snowPage.resetParticleSystems();
 
-                                    snowPage.resetParticleSystems();
-
-                                    mainWindow.setSetting("BackgroundNum", snowPage.currentBackgroundNum.toString(10));
-                                } else {
-                                    purchaseDialog.open();
-                                }
+                                mainWindow.setSetting("BackgroundNum", snowPage.currentBackgroundNum.toString(10));
+                            } else {
+                                purchaseDialog.open();
                             }
                         }
                     }
+                }
+
+                ScrollBar.vertical: ScrollBar {
+                    policy: ScrollBar.AlwaysOn
                 }
             }
         }
