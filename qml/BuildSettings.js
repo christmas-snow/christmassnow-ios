@@ -1,1 +1,1 @@
-var VERSION_FULL = false;
+var VERSION_FULL = true;

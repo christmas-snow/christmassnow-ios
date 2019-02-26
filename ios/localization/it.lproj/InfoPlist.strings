@@ -2,7 +2,7 @@
   InfoPlist.strings
 */
 
-CFBundleDisplayName               = "La Neve Lite";
+CFBundleDisplayName               = "La Neve";
 NSCameraUsageDescription          = "Abilitare l'accesso alla telecamera se si desidera accedere a questa funzione";
 NSMotionUsageDescription          = "Abilitare l'accesso ai sensori di movimento per consentire reazioni ai movimenti del telefono";
 NSPhotoLibraryAddUsageDescription = "Abilitare l'accesso in scrittura alla libreria di foto se si desidera salvare l'immagine acquisita";

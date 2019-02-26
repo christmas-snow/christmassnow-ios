@@ -1,3 +1,5 @@
+TARGET = christmassnow.full
+
 QT += quick quickcontrols2 sql multimedia sensors purchasing
 CONFIG += c++11
 

@@ -1,8 +1,0 @@
-/* 
-  InfoPlist.strings
-*/
-
-CFBundleDisplayName               = "Schnee";
-NSCameraUsageDescription          = "Bitte aktivieren Sie den Kamerazugriff, wenn Sie auf diese Funktion zugreifen möchten";
-NSMotionUsageDescription          = "Bitte aktivieren Sie den Bewegungssensorzugriff, um Reaktionen auf Telefonbewegungen zuzulassen";
-NSPhotoLibraryAddUsageDescription = "Aktivieren Sie den Schreibzugriff auf die Fotobibliothek, wenn Sie das aufgenommene Bild speichern möchten";
