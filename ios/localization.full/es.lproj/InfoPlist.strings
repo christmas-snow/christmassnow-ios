@@ -1,8 +1,0 @@
-/* 
-  InfoPlist.strings
-*/
-
-CFBundleDisplayName               = "Nieve";
-NSCameraUsageDescription          = "Habilite el acceso a la cámara si desea acceder a esta función";
-NSMotionUsageDescription          = "Habilite el acceso de los sensores de movimiento para permitir reacciones a los movimientos del teléfono";
-NSPhotoLibraryAddUsageDescription = "Habilite el acceso de escritura a la biblioteca de fotos si desea guardar la imagen capturada en ella";
