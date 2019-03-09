@@ -22,7 +22,7 @@ public:
     explicit AdMobHelper(QObject *parent = nullptr);
     virtual ~AdMobHelper();
 
-    int  bannerViewHeight() const;
+    int bannerViewHeight() const;
 
     Q_INVOKABLE void showBannerView();
     Q_INVOKABLE void hideBannerView();
