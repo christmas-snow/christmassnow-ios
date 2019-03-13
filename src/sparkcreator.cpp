@@ -40,7 +40,7 @@ QString SparkCreator::imageFilePath() const
     return ImageFilePath;
 }
 
-void SparkCreator::setImageFilePath(QString file_path)
+void SparkCreator::setImageFilePath(const QString &file_path)
 {
     ImageFilePath = file_path;
 
