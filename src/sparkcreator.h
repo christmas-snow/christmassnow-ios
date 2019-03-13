@@ -15,6 +15,7 @@ class SparkCreator : public QObject
 
 public:
     explicit SparkCreator(QObject *parent = nullptr);
+    ~SparkCreator() override = default;
 
     int minSparksCount() const;
     void setMinSparksCount(int count);
@@ -23,13 +24,13 @@ public:
     void setMaxSparksCount(int count);
 
     QString imageFilePath() const;
-    void setImageFilePath(QString file_path);
+    void setImageFilePath(const QString &file_path);
 
     Q_INVOKABLE void createRandomSparks();
 
 signals:
-    void error(QString errorString);
-    void randomSparksCreated(QVariantList sparks);
+    void error(const QString &errorString);
+    void randomSparksCreated(const QVariantList &sparks);
 
 private:
     int          MinSparksCount, MaxSparksCount;

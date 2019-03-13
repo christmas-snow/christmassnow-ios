@@ -20,7 +20,7 @@ public:
                          ADMOB_TEST_DEVICE_ID;
 
     explicit AdMobHelper(QObject *parent = nullptr);
-    virtual ~AdMobHelper();
+    ~AdMobHelper() override;
 
     int bannerViewHeight() const;
 
