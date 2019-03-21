@@ -1,3 +1,4 @@
+TEMPLATE = app
 TARGET = christmassnow
 
 QT += quick quickcontrols2 sql multimedia sensors purchasing
@@ -61,6 +62,3 @@ ios {
     QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist
 }
-
-# Default rules for deployment.
-include(deployment.pri)
