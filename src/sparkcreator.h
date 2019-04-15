@@ -15,7 +15,14 @@ class SparkCreator : public QObject
 
 public:
     explicit SparkCreator(QObject *parent = nullptr);
-    ~SparkCreator() override = default;
+
+    SparkCreator(const SparkCreator&) = delete;
+    SparkCreator(const SparkCreator&&) noexcept = delete;
+
+    SparkCreator& operator=(const SparkCreator&) = delete;
+    SparkCreator& operator=(const SparkCreator&&) noexcept = delete;
+
+    ~SparkCreator() noexcept override = default;
 
     int minSparksCount() const;
     void setMinSparksCount(int count);
