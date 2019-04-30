@@ -17,10 +17,10 @@ public:
     explicit SparkCreator(QObject *parent = nullptr);
 
     SparkCreator(const SparkCreator&) = delete;
-    SparkCreator(const SparkCreator&&) noexcept = delete;
+    SparkCreator(SparkCreator&&) noexcept = delete;
 
     SparkCreator& operator=(const SparkCreator&) = delete;
-    SparkCreator& operator=(const SparkCreator&&) noexcept = delete;
+    SparkCreator& operator=(SparkCreator&&) noexcept = delete;
 
     ~SparkCreator() noexcept override = default;
 
