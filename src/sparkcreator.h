@@ -19,8 +19,8 @@ public:
     SparkCreator(const SparkCreator&) = delete;
     SparkCreator(SparkCreator&&) noexcept = delete;
 
-    SparkCreator& operator=(const SparkCreator&) = delete;
-    SparkCreator& operator=(SparkCreator&&) noexcept = delete;
+    SparkCreator &operator=(const SparkCreator&) = delete;
+    SparkCreator &operator=(SparkCreator&&) noexcept = delete;
 
     ~SparkCreator() noexcept override = default;
 
