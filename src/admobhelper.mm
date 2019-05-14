@@ -11,8 +11,6 @@ const QString AdMobHelper::ADMOB_APP_ID              ("ca-app-pub-24550888550156
 const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID  ("ca-app-pub-2455088855015693/9661812425");
 const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
 
-AdMobHelper *AdMobHelper::Instance = nullptr;
-
 @interface BannerViewDelegate : NSObject<GADBannerViewDelegate>
 
 - (id)init;
@@ -130,7 +128,6 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
     [GADMobileAds configureWithApplicationID:ADMOB_APP_ID.toNSString()];
 
     BannerViewHeight           = 0;
-    Instance                   = this;
     BannerViewDelegateInstance = nullptr;
 }
 
@@ -139,6 +136,13 @@ AdMobHelper::~AdMobHelper() noexcept
     if (BannerViewDelegateInstance != nullptr && BannerViewDelegateInstance != nil) {
         [BannerViewDelegateInstance release];
     }
+}
+
+AdMobHelper &AdMobHelper::GetInstance()
+{
+    static AdMobHelper instance;
+
+    return instance;
 }
 
 int AdMobHelper::bannerViewHeight() const
@@ -178,7 +182,7 @@ void AdMobHelper::hideBannerView()
 
 void AdMobHelper::setBannerViewHeight(int height)
 {
-    Instance->BannerViewHeight = height;
+    GetInstance().BannerViewHeight = height;
 
-    emit Instance->bannerViewHeightChanged(Instance->BannerViewHeight);
+    emit GetInstance().bannerViewHeightChanged(GetInstance().BannerViewHeight);
 }
