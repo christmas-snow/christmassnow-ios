@@ -88,6 +88,8 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
 
 - (void)dealloc
 {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+
     [BannerView removeFromSuperview];
     [BannerView release];
 
