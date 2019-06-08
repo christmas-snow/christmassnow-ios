@@ -13,7 +13,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
 
 @interface BannerViewDelegate : NSObject<GADBannerViewDelegate>
 
-- (instancetype)init;
+- (instancetype)initWithHelper:(AdMobHelper *)helper;
 - (void)dealloc;
 - (void)loadAd;
 
@@ -22,13 +22,16 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
 @implementation BannerViewDelegate
 {
     GADBannerView *BannerView;
+    AdMobHelper   *AdMobHelperInstance;
 }
 
-- (instancetype)init
+- (instancetype)initWithHelper:(AdMobHelper *)helper
 {
     self = [super init];
 
     if (self) {
+        AdMobHelperInstance = helper;
+
         UIViewController * __block root_view_controller = nil;
 
         [UIApplication.sharedApplication.windows enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
@@ -59,35 +62,18 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
                 [BannerView.centerXAnchor constraintEqualToAnchor:guide.centerXAnchor],
                 [BannerView.topAnchor     constraintEqualToAnchor:guide.topAnchor]
             ]];
+
+            CGSize  status_bar_size   = UIApplication.sharedApplication.statusBarFrame.size;
+            CGFloat status_bar_height = qMin(status_bar_size.width, status_bar_size.height);
+
+            AdMobHelperInstance->setBannerViewHeight(qFloor(BannerView.frame.size.height + root_view_controller.view.safeAreaInsets.top
+                                                                                         - status_bar_height));
         } else {
             assert(0);
         }
-
-        [self performSelector:@selector(deferredInit) withObject:nil afterDelay:0.0];
     }
 
     return self;
-}
-
-- (void)deferredInit
-{
-    UIViewController * __block root_view_controller = nil;
-
-    [UIApplication.sharedApplication.windows enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
-        root_view_controller = window.rootViewController;
-
-        *stop = (root_view_controller != nil);
-    }];
-
-    if (@available(iOS 11, *)) {
-        CGSize  status_bar_size   = UIApplication.sharedApplication.statusBarFrame.size;
-        CGFloat status_bar_height = qMin(status_bar_size.width, status_bar_size.height);
-
-        AdMobHelper::setBannerViewHeight(qFloor(BannerView.frame.size.height + root_view_controller.view.safeAreaInsets.top
-                                                                             - status_bar_height));
-    } else {
-        assert(0);
-    }
 }
 
 - (void)dealloc
@@ -179,7 +165,7 @@ void AdMobHelper::showBannerView()
         BannerViewDelegateInstance = nil;
     }
 
-    BannerViewDelegateInstance = [[BannerViewDelegate alloc] init];
+    BannerViewDelegateInstance = [[BannerViewDelegate alloc] initWithHelper:this];
 
     [BannerViewDelegateInstance loadAd];
 }
@@ -199,7 +185,7 @@ void AdMobHelper::hideBannerView()
 
 void AdMobHelper::setBannerViewHeight(int height)
 {
-    GetInstance().BannerViewHeight = height;
+    BannerViewHeight = height;
 
-    emit GetInstance().bannerViewHeightChanged(GetInstance().BannerViewHeight);
+    emit bannerViewHeightChanged(BannerViewHeight);
 }
