@@ -30,7 +30,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
 {
     self = [super init];
 
-    if (self) {
+    if (self != nil) {
         AdMobHelperInstance = helper;
 
         UIViewController * __block root_view_controller = nil;
