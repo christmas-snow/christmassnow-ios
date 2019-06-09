@@ -15,6 +15,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
 
 - (instancetype)initWithHelper:(AdMobHelper *)helper;
 - (void)dealloc;
+- (void)removeHelperAndAutorelease;
 - (void)loadAd;
 
 @end
@@ -66,8 +67,10 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
             CGSize  status_bar_size   = UIApplication.sharedApplication.statusBarFrame.size;
             CGFloat status_bar_height = qMin(status_bar_size.width, status_bar_size.height);
 
-            AdMobHelperInstance->setBannerViewHeight(qFloor(BannerView.frame.size.height + root_view_controller.view.safeAreaInsets.top
-                                                                                         - status_bar_height));
+            if (AdMobHelperInstance != nullptr) {
+                AdMobHelperInstance->setBannerViewHeight(qFloor(BannerView.frame.size.height + root_view_controller.view.safeAreaInsets.top
+                                                                                             - status_bar_height));
+            }
         } else {
             assert(0);
         }
@@ -82,6 +85,13 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
     [BannerView release];
 
     [super dealloc];
+}
+
+- (void)removeHelperAndAutorelease
+{
+    AdMobHelperInstance = nullptr;
+
+    [self autorelease];
 }
 
 - (void)loadAd
@@ -137,7 +147,7 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
 AdMobHelper::~AdMobHelper() noexcept
 {
     if (BannerViewDelegateInstance != nullptr && BannerViewDelegateInstance != nil) {
-        [BannerViewDelegateInstance release];
+        [BannerViewDelegateInstance removeHelperAndAutorelease];
     }
 }
 
@@ -156,7 +166,7 @@ int AdMobHelper::bannerViewHeight() const
 void AdMobHelper::showBannerView()
 {
     if (BannerViewDelegateInstance != nullptr && BannerViewDelegateInstance != nil) {
-        [BannerViewDelegateInstance release];
+        [BannerViewDelegateInstance removeHelperAndAutorelease];
 
         BannerViewHeight = 0;
 
@@ -173,7 +183,7 @@ void AdMobHelper::showBannerView()
 void AdMobHelper::hideBannerView()
 {
     if (BannerViewDelegateInstance != nullptr && BannerViewDelegateInstance != nil) {
-        [BannerViewDelegateInstance release];
+        [BannerViewDelegateInstance removeHelperAndAutorelease];
 
         BannerViewHeight = 0;
 
