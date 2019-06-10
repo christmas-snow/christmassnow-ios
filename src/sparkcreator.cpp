@@ -1,6 +1,7 @@
 #include <QtCore/QtGlobal>
 #include <QtCore/QtMath>
 #include <QtCore/QDateTime>
+#include <QtCore/QVariantMap>
 #include <QtGui/QColor>
 #include <QtGui/QImage>
 
@@ -49,7 +50,7 @@ void SparkCreator::setImageFilePath(const QString &file_path)
         QImage image(ImageFilePath);
 
         if (!image.isNull()) {
-            snowPixels.clear();
+            SnowPixels.clear();
 
             for (int x = 0; x < image.width(); x++) {
                 for (int y = 0; y < image.height(); y++) {
@@ -61,7 +62,7 @@ void SparkCreator::setImageFilePath(const QString &file_path)
                         pixel.insert("x", x);
                         pixel.insert("y", y);
 
-                        snowPixels.append(pixel);
+                        SnowPixels.append(pixel);
                     }
                 }
             }
@@ -76,7 +77,7 @@ void SparkCreator::createRandomSparks()
     QVariantList sparks;
 
     for (int i = 0; i < MinSparksCount + qrand() * (static_cast<qreal>(MaxSparksCount - MinSparksCount) / RAND_MAX); i++) {
-        sparks.append(snowPixels.at(qFloor(qrand() * (static_cast<qreal>(snowPixels.count() - 1) / RAND_MAX))));
+        sparks.append(SnowPixels.at(qFloor(qrand() * (static_cast<qreal>(SnowPixels.count() - 1) / RAND_MAX))));
     }
 
     emit randomSparksCreated(sparks);
