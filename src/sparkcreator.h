@@ -3,7 +3,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
-#include <QtCore/QVariant>
+#include <QtCore/QVariantList>
 
 class SparkCreator : public QObject
 {
@@ -42,7 +42,7 @@ signals:
 private:
     int          MinSparksCount, MaxSparksCount;
     QString      ImageFilePath;
-    QVariantList snowPixels;
+    QVariantList SnowPixels;
 };
 
 #endif // SPARKCREATOR_H
