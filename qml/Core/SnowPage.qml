@@ -12,26 +12,28 @@ Item {
     id:    snowPage
     state: "snowLevel0"
 
-    property bool appInForeground:        Qt.application.state === Qt.ApplicationActive
-    property bool pageActive:             StackView.status === StackView.Active
+    readonly property bool appInForeground:        Qt.application.state === Qt.ApplicationActive
+    readonly property bool pageActive:             StackView.status === StackView.Active
 
-    property int bannerViewHeight:        AdMobHelper.bannerViewHeight
-    property int currentBackgroundNum:    1
-    property int maxBackgroundNum:        3
-    property int bigSnowflakesCount:      10
-    property int bigSnowflakesCountMax:   10
-    property int smallSnowflakesCount:    80
-    property int smallSnowflakesCountMax: 80
-    property int ceaseTime:               5000
+    readonly property int bannerViewHeight:        AdMobHelper.bannerViewHeight
+    readonly property int maxBackgroundNum:        3
+    readonly property int bigSnowflakesCountMax:   10
+    readonly property int smallSnowflakesCountMax: 80
+    readonly property int ceaseTime:               5000
 
-    property real snowflakesAngle:        90.0
-    property real defaultSnowflakesAngle: 90.0
-    property real snowflakesVelocity:     30.0
-    property real snowflakesVelocityMin:  30.0
-    property real snowflakesVelocityMax:  360.0
-    property real accelShakeThreshold:    50.0
+    readonly property real defaultSnowflakesAngle: 90.0
+    readonly property real snowflakesVelocityMin:  30.0
+    readonly property real snowflakesVelocityMax:  360.0
+    readonly property real accelShakeThreshold:    50.0
 
-    property var sparksList:              null
+    property int currentBackgroundNum:             1
+    property int bigSnowflakesCount:               10
+    property int smallSnowflakesCount:             80
+
+    property real snowflakesAngle:                 90.0
+    property real snowflakesVelocity:              30.0
+
+    property var sparksList:                       null
 
     states: [
         State {
@@ -1088,8 +1090,9 @@ Item {
         repeat:           true
         triggeredOnStart: true
 
-        property int frameNumber: 0
-        property int framesCount: 5
+        readonly property int framesCount: 5
+
+        property int frameNumber:          0
 
         onRunningChanged: {
             if (running) {

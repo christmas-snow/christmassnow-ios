@@ -6,8 +6,9 @@ Image {
     height: sourceSize.height
     source: "qrc:/resources/images/snow/sparks/spark_%1.png".arg(sparkType)
 
-    property int sparkType:    1
-    property int maxSparkType: 7
+    readonly property int maxSparkType: 7
+
+    property int sparkType:             1
 
     SequentialAnimation {
         id: sparkSequentialAnimation
