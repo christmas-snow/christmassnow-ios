@@ -17,13 +17,13 @@ Item {
 
     readonly property int bannerViewHeight:        AdMobHelper.bannerViewHeight
     readonly property int maxBackgroundNum:        3
-    readonly property int bigSnowflakesCountMax:   10
-    readonly property int smallSnowflakesCountMax: 80
+    readonly property int maxBigSnowflakesCount:   10
+    readonly property int maxSmallSnowflakesCount: 80
     readonly property int ceaseTime:               5000
 
     readonly property real defaultSnowflakesAngle: 90.0
-    readonly property real snowflakesVelocityMin:  30.0
-    readonly property real snowflakesVelocityMax:  360.0
+    readonly property real minSnowflakesVelocity:  30.0
+    readonly property real maxSnowflakesVelocity:  360.0
     readonly property real accelShakeThreshold:    50.0
 
     property int currentBackgroundNum:             1
@@ -317,13 +317,13 @@ Item {
     }
 
     onBigSnowflakesCountChanged: {
-        if (bigSnowflakesCount > (bigSnowflakesCountMax * 4) / 5) {
+        if (bigSnowflakesCount > (maxBigSnowflakesCount * 4) / 5) {
             state = "snowLevel0";
-        } else if (bigSnowflakesCount > (bigSnowflakesCountMax * 3) / 5) {
+        } else if (bigSnowflakesCount > (maxBigSnowflakesCount * 3) / 5) {
             state = "snowLevel1";
-        } else if (bigSnowflakesCount > (bigSnowflakesCountMax * 2) / 5) {
+        } else if (bigSnowflakesCount > (maxBigSnowflakesCount * 2) / 5) {
             state = "snowLevel2";
-        } else if (bigSnowflakesCount > (bigSnowflakesCountMax * 1) / 5) {
+        } else if (bigSnowflakesCount > (maxBigSnowflakesCount * 1) / 5) {
             state = "snowLevel3";
         } else {
             state = "snowLevel4";
@@ -855,7 +855,7 @@ Item {
                         var velocity = Math.sqrt(Math.pow(mouse.x - pressedX, 2) + Math.pow(mouse.y - pressedY, 2)) * 1000 / denom;
 
                         snowPage.snowflakesAngle    = (Math.atan2(mouse.y - pressedY, mouse.x - pressedX) * 180) / Math.PI;
-                        snowPage.snowflakesVelocity = velocity < snowPage.snowflakesVelocityMax ? velocity : snowPage.snowflakesVelocityMax;
+                        snowPage.snowflakesVelocity = velocity < snowPage.maxSnowflakesVelocity ? velocity : snowPage.maxSnowflakesVelocity;
                     }
                 }
 
@@ -988,8 +988,8 @@ Item {
                         onClicked: {
                             if (mainWindow.fullVersion || settingNumber === 1) {
                                 snowPage.currentBackgroundNum = settingNumber;
-                                snowPage.bigSnowflakesCount   = snowPage.bigSnowflakesCountMax;
-                                snowPage.smallSnowflakesCount = snowPage.smallSnowflakesCountMax;
+                                snowPage.bigSnowflakesCount   = snowPage.maxBigSnowflakesCount;
+                                snowPage.smallSnowflakesCount = snowPage.maxSmallSnowflakesCount;
 
                                 snowPage.resetParticleSystems();
 
@@ -1058,8 +1058,8 @@ Item {
                 if (Math.abs(reading.x - lastReadingX) > snowPage.accelShakeThreshold ||
                     Math.abs(reading.y - lastReadingY) > snowPage.accelShakeThreshold ||
                     Math.abs(reading.z - lastReadingZ) > snowPage.accelShakeThreshold) {
-                    snowPage.bigSnowflakesCount   = snowPage.bigSnowflakesCountMax;
-                    snowPage.smallSnowflakesCount = snowPage.smallSnowflakesCountMax;
+                    snowPage.bigSnowflakesCount   = snowPage.maxBigSnowflakesCount;
+                    snowPage.smallSnowflakesCount = snowPage.maxSmallSnowflakesCount;
 
                     snowPage.resetParticleSystems();
                 }
@@ -1152,10 +1152,10 @@ Item {
         onTriggered: {
             var angle    = Math.abs(snowPage.snowflakesAngle) < snowPage.defaultSnowflakesAngle ? snowPage.snowflakesAngle + (180 / (snowPage.ceaseTime / interval)) :
                                                                                                   snowPage.snowflakesAngle - (180 / (snowPage.ceaseTime / interval));
-            var velocity = snowPage.snowflakesVelocity - snowPage.snowflakesVelocityMax / (snowPage.ceaseTime / interval);
+            var velocity = snowPage.snowflakesVelocity - snowPage.maxSnowflakesVelocity / (snowPage.ceaseTime / interval);
 
             snowPage.snowflakesAngle    = angle < -180 ? 180 : angle;
-            snowPage.snowflakesVelocity = velocity < snowPage.snowflakesVelocityMin ? snowPage.snowflakesVelocityMin : velocity;
+            snowPage.snowflakesVelocity = velocity < snowPage.minSnowflakesVelocity ? snowPage.minSnowflakesVelocity : velocity;
         }
     }
 
