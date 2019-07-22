@@ -6,7 +6,7 @@ import QtPurchasing 1.0
 
 import "BuildSettings.js" as BuildSettingsScript
 
-Window {
+ApplicationWindow {
     id:         mainWindow
     title:      qsTr("Snow Scenes")
     visibility: Window.FullScreen
@@ -124,10 +124,9 @@ Window {
         }
     }
 
-    MouseArea {
-        id:           screenLockMouseArea
+    MultiPointTouchArea {
         anchors.fill: parent
-        z:            100
+        z:            1
         enabled:      mainStackView.busy
     }
 
