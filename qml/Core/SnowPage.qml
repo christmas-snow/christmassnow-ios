@@ -880,7 +880,7 @@ Item {
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin:     30
-            z:                        20
+            z:                        1
             spacing:                  16
 
             Image {
@@ -960,7 +960,7 @@ Item {
             anchors.left:           parent.left
             width:                  96
             height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
-            z:                      25
+            z:                      2
             clip:                   true
             color:                  "black"
             opacity:                0.75
@@ -1010,7 +1010,7 @@ Item {
         Rectangle {
              id:           waitRectangle
              anchors.fill: parent
-             z:            30
+             z:            3
              color:        "black"
              opacity:      0.75
              visible:      false
@@ -1020,7 +1020,7 @@ Item {
                  running:          parent.visible
              }
 
-             MouseArea {
+             MultiPointTouchArea {
                  anchors.fill: parent
              }
          }
@@ -1028,7 +1028,7 @@ Item {
 
     PurchaseDialog {
         id: purchaseDialog
-        z:  35
+        z:  1
 
         onPurchaseFullVersion: {
             mainWindow.purchaseFullVersion();
@@ -1041,7 +1041,7 @@ Item {
 
     HelpDialog {
         id: helpDialog
-        z:  35
+        z:  1
     }
 
     Accelerometer {
