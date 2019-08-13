@@ -846,10 +846,10 @@ Item {
                 property int pressedX:       0
                 property int pressedY:       0
 
-                property double pressedTime: (new Date).getTime()
+                property double pressedTime: (new Date()).getTime()
 
                 onPositionChanged: {
-                    var denom = (new Date).getTime() - pressedTime;
+                    var denom = (new Date()).getTime() - pressedTime;
 
                     if (denom > 0) {
                         var velocity = Math.sqrt(Math.pow(mouse.x - pressedX, 2) + Math.pow(mouse.y - pressedY, 2)) * 1000 / denom;
@@ -862,7 +862,7 @@ Item {
                 onPressed: {
                     pressedX    = mouse.x;
                     pressedY    = mouse.y;
-                    pressedTime = (new Date).getTime();
+                    pressedTime = (new Date()).getTime();
                 }
 
                 onDoubleClicked: {
