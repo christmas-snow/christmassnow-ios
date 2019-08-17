@@ -423,12 +423,12 @@ Item {
         Image {
             id:               backgroundImage
             anchors.centerIn: parent
-            width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
-            height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
+            width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
+            height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
             source:           "qrc:/resources/images/snow/bg-%1.png".arg(snowPage.currentBackgroundNum)
             fillMode:         Image.PreserveAspectCrop
 
-            function calculateWidth(src_width, src_height, dst_width, dst_height) {
+            function imageWidth(src_width, src_height, dst_width, dst_height) {
                 if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                     if (dst_width / dst_height < src_width / src_height) {
                         return src_width * dst_height / src_height;
@@ -440,7 +440,7 @@ Item {
                 }
             }
 
-            function calculateHeight(src_width, src_height, dst_width, dst_height) {
+            function imageHeight(src_width, src_height, dst_width, dst_height) {
                 if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                     if (dst_width / dst_height < src_width / src_height) {
                         return dst_height;
@@ -456,12 +456,12 @@ Item {
                 id:               snowImage1
                 anchors.centerIn: parent
                 z:                1
-                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
-                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 source:           "qrc:/resources/images/snow/bg-%1-1.png".arg(snowPage.currentBackgroundNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                function imageWidth(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return src_width * dst_height / src_height;
@@ -473,7 +473,7 @@ Item {
                     }
                 }
 
-                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                function imageHeight(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return dst_height;
@@ -490,12 +490,12 @@ Item {
                 id:               snowImage2
                 anchors.centerIn: parent
                 z:                2
-                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
-                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 source:           "qrc:/resources/images/snow/bg-%1-2.png".arg(snowPage.currentBackgroundNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                function imageWidth(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return src_width * dst_height / src_height;
@@ -507,7 +507,7 @@ Item {
                     }
                 }
 
-                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                function imageHeight(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return dst_height;
@@ -524,12 +524,12 @@ Item {
                 id:               snowImage3
                 anchors.centerIn: parent
                 z:                3
-                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
-                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 source:           "qrc:/resources/images/snow/bg-%1-3.png".arg(snowPage.currentBackgroundNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                function imageWidth(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return src_width * dst_height / src_height;
@@ -541,7 +541,7 @@ Item {
                     }
                 }
 
-                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                function imageHeight(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return dst_height;
@@ -558,12 +558,12 @@ Item {
                 id:               snowImage4
                 anchors.centerIn: parent
                 z:                4
-                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
-                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 source:           "qrc:/resources/images/snow/bg-%1-4.png".arg(snowPage.currentBackgroundNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                function imageWidth(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return src_width * dst_height / src_height;
@@ -575,7 +575,7 @@ Item {
                     }
                 }
 
-                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                function imageHeight(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return dst_height;
@@ -592,12 +592,12 @@ Item {
                 id:               snowImage5
                 anchors.centerIn: parent
                 z:                6
-                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
-                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 source:           "qrc:/resources/images/snow/bg-%1-4.png".arg(snowPage.currentBackgroundNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                function imageWidth(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return src_width * dst_height / src_height;
@@ -609,7 +609,7 @@ Item {
                     }
                 }
 
-                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                function imageHeight(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return dst_height;
