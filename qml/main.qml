@@ -55,14 +55,6 @@ ApplicationWindow {
         return value;
     }
 
-    function purchaseFullVersion() {
-        fullVersionProduct.purchase();
-    }
-
-    function restorePurchases() {
-        store.restorePurchases();
-    }
-
     Store {
         id: store
 

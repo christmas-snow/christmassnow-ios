@@ -1031,11 +1031,11 @@ Item {
         z:  1
 
         onPurchaseFullVersion: {
-            mainWindow.purchaseFullVersion();
+            fullVersionProduct.purchase();
         }
 
         onRestorePurchases: {
-            mainWindow.restorePurchases();
+            store.restorePurchases();
         }
     }
 
