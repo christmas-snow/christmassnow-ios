@@ -4,6 +4,8 @@ import QtQuick.Controls 2.5
 import QtQuick.LocalStorage 2.12
 import QtPurchasing 1.0
 
+import "Core/Dialog"
+
 import "BuildSettings.js" as BuildSettingsScript
 
 ApplicationWindow {
@@ -12,20 +14,20 @@ ApplicationWindow {
     visibility: Window.FullScreen
     visible:    true
 
-    property bool fullVersion: false
+    property bool fullVersion:    false
+
+    property string adMobConsent: ""
 
     onFullVersionChanged: {
         setSetting("FullVersion", fullVersion ? "true" : "false");
 
-        if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
-            if (fullVersion) {
-                AdMobHelper.hideBannerView();
-            } else {
-                AdMobHelper.showBannerView();
-            }
-        } else {
-            AdMobHelper.hideBannerView();
-        }
+        updateFeatures();
+    }
+
+    onAdMobConsentChanged: {
+        setSetting("AdMobConsent", adMobConsent);
+
+        updateFeatures();
     }
 
     function setSetting(key, value) {
@@ -53,6 +55,24 @@ ApplicationWindow {
         });
 
         return value;
+    }
+
+    function updateFeatures() {
+        if (!fullVersion && (adMobConsent === "PERSONALIZED" || adMobConsent === "NON_PERSONALIZED")) {
+            AdMobHelper.setPersonalization(adMobConsent === "PERSONALIZED");
+
+            AdMobHelper.initAds();
+        }
+
+        if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
+            if (fullVersion) {
+                AdMobHelper.hideBannerView();
+            } else {
+                AdMobHelper.showBannerView();
+            }
+        } else {
+            AdMobHelper.hideBannerView();
+        }
     }
 
     Store {
@@ -122,6 +142,18 @@ ApplicationWindow {
         enabled:      mainStackView.busy
     }
 
+    AdMobConsentDialog {
+        id: adMobConsentDialog
+
+        onPersonalizedAdsSelected: {
+            mainWindow.adMobConsent = "PERSONALIZED";
+        }
+
+        onNonPersonalizedAdsSelected: {
+            mainWindow.adMobConsent = "NON_PERSONALIZED";
+        }
+    }
+
     Component.onCompleted: {
         if (BuildSettingsScript.VERSION_FULL) {
             fullVersion = true;
@@ -129,12 +161,20 @@ ApplicationWindow {
             fullVersion = (getSetting("FullVersion", "false") === "true");
         }
 
+        adMobConsent = getSetting("AdMobConsent", "");
+
+        updateFeatures();
+
         var component = Qt.createComponent("Core/SnowPage.qml");
 
         if (component.status === Component.Ready) {
             mainStackView.push(component);
         } else {
             console.log(component.errorString());
+        }
+
+        if (!fullVersion && adMobConsent !== "PERSONALIZED" && adMobConsent !== "NON_PERSONALIZED") {
+            adMobConsentDialog.open();
         }
     }
 }

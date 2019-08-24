@@ -7,9 +7,10 @@
 
 #include "admobhelper.h"
 
-const QString AdMobHelper::ADMOB_APP_ID              ("ca-app-pub-2455088855015693~4469017889");
-const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID  ("ca-app-pub-2455088855015693/9661812425");
-const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
+const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID("ca-app-pub-2455088855015693/9661812425");
+const QString AdMobHelper::ADMOB_TEST_DEVICE_ID    ("");
+
+static const NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 
 @interface BannerViewDelegate : NSObject<GADBannerViewDelegate>
 
@@ -17,12 +18,14 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
 - (instancetype)initWithHelper:(AdMobHelper *)helper NS_DESIGNATED_INITIALIZER;
 - (void)dealloc;
 - (void)removeHelperAndAutorelease;
+- (void)setPersonalization:(BOOL)personalized;
 - (void)loadAd;
 
 @end
 
 @implementation BannerViewDelegate
 {
+    BOOL           ShowPersonalizedAds;
     GADBannerView *BannerView;
     AdMobHelper   *AdMobHelperInstance;
 }
@@ -32,6 +35,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
     self = [super init];
 
     if (self != nil) {
+        ShowPersonalizedAds = NO;
         AdMobHelperInstance = helper;
 
         UIViewController * __block root_view_controller = nil;
@@ -95,12 +99,25 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
     [self autorelease];
 }
 
+- (void)setPersonalization:(BOOL)personalized
+{
+    ShowPersonalizedAds = personalized;
+}
+
 - (void)loadAd
 {
     GADRequest *request = [GADRequest request];
 
     if (AdMobHelper::ADMOB_TEST_DEVICE_ID != "") {
         request.testDevices = @[AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString()];
+    }
+
+    if (!ShowPersonalizedAds) {
+        GADExtras *extras = [[[GADExtras alloc] init] autorelease];
+
+        extras.additionalParameters = @{@"npa": @"1"};
+
+        [request registerAdNetworkExtras:extras];
     }
 
     [BannerView loadRequest:request];
@@ -132,24 +149,22 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
 
     qWarning() << QString::fromNSString(error.localizedDescription);
 
-    [self performSelector:@selector(loadAd) withObject:nil afterDelay:10.0];
+    [self performSelector:@selector(loadAd) withObject:nil afterDelay:AD_RELOAD_ON_FAILURE_DELAY];
 }
 
 @end
 
 AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
 {
-    [GADMobileAds configureWithApplicationID:ADMOB_APP_ID.toNSString()];
-
+    Initialized                = false;
+    ShowPersonalizedAds        = false;
     BannerViewHeight           = 0;
     BannerViewDelegateInstance = nil;
 }
 
 AdMobHelper::~AdMobHelper() noexcept
 {
-    if (BannerViewDelegateInstance != nil) {
-        [BannerViewDelegateInstance removeHelperAndAutorelease];
-    }
+    [BannerViewDelegateInstance removeHelperAndAutorelease];
 }
 
 AdMobHelper &AdMobHelper::GetInstance()
@@ -164,26 +179,45 @@ int AdMobHelper::bannerViewHeight() const
     return BannerViewHeight;
 }
 
+void AdMobHelper::initAds()
+{
+    if (!Initialized) {
+        [GADMobileAds sharedInstance].requestConfiguration.maxAdContentRating = GADMaxAdContentRatingGeneral;
+
+        [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
+
+        Initialized = true;
+    }
+}
+
+void AdMobHelper::setPersonalization(bool personalized)
+{
+    ShowPersonalizedAds = personalized;
+
+    if (Initialized) {
+        [BannerViewDelegateInstance setPersonalization:ShowPersonalizedAds];
+    }
+}
+
 void AdMobHelper::showBannerView()
 {
-    if (BannerViewDelegateInstance != nil) {
+    if (Initialized) {
         [BannerViewDelegateInstance removeHelperAndAutorelease];
 
         BannerViewHeight = 0;
 
         emit bannerViewHeightChanged(BannerViewHeight);
 
-        BannerViewDelegateInstance = nil;
+        BannerViewDelegateInstance = [[BannerViewDelegate alloc] initWithHelper:this];
+
+        [BannerViewDelegateInstance setPersonalization:ShowPersonalizedAds];
+        [BannerViewDelegateInstance loadAd];
     }
-
-    BannerViewDelegateInstance = [[BannerViewDelegate alloc] initWithHelper:this];
-
-    [BannerViewDelegateInstance loadAd];
 }
 
 void AdMobHelper::hideBannerView()
 {
-    if (BannerViewDelegateInstance != nil) {
+    if (Initialized) {
         [BannerViewDelegateInstance removeHelperAndAutorelease];
 
         BannerViewHeight = 0;
