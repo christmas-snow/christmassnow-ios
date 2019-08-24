@@ -826,6 +826,28 @@ Item {
             }
         }
 
+        Image {
+            id:                  adSettingsButtonImage
+            anchors.top:         parent.top
+            anchors.right:       parent.right
+            anchors.topMargin:   Math.max(snowPage.bannerViewHeight + UtilScript.pt(8), UtilScript.pt(34))
+            anchors.rightMargin: UtilScript.pt(8)
+            z:                   1
+            width:               UtilScript.pt(32)
+            height:              UtilScript.pt(32)
+            source:              "qrc:/resources/images/snow/button_ad_settings.png"
+            fillMode:            Image.PreserveAspectFit
+
+            MouseArea {
+                id:           adSettingsButtonMouseArea
+                anchors.fill: parent
+
+                onClicked: {
+                    adMobConsentDialog.open();
+                }
+            }
+        }
+
         Row {
             id:                       buttonImageRow
             anchors.bottom:           parent.bottom
