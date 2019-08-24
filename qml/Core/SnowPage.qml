@@ -8,9 +8,11 @@ import SparkCreator 1.0
 import "Dialog"
 import "Snow"
 
+import "../Util.js" as UtilScript
+
 Item {
     id:    snowPage
-    state: "snowLevel0"
+    state: pageState(bigSnowflakesCount, maxBigSnowflakesCount)
 
     readonly property bool appInForeground:        Qt.application.state === Qt.ApplicationActive
     readonly property bool pageActive:             StackView.status === StackView.Active
@@ -22,8 +24,8 @@ Item {
     readonly property int ceaseTime:               5000
 
     readonly property real defaultSnowflakesAngle: 90.0
-    readonly property real minSnowflakesVelocity:  30.0
-    readonly property real maxSnowflakesVelocity:  360.0
+    readonly property real minSnowflakesVelocity:  UtilScript.pt(30.0)
+    readonly property real maxSnowflakesVelocity:  UtilScript.pt(360.0)
     readonly property real accelShakeThreshold:    50.0
 
     property int currentBackgroundNum:             1
@@ -31,7 +33,7 @@ Item {
     property int smallSnowflakesCount:             80
 
     property real snowflakesAngle:                 90.0
-    property real snowflakesVelocity:              30.0
+    property real snowflakesVelocity:              UtilScript.pt(30.0)
 
     property var sparksList:                       null
 
@@ -41,31 +43,26 @@ Item {
 
             PropertyChanges {
                 target:  snowImage1
-                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage2
-                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage3
-                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage4
-                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage5
-                enabled: false
                 visible: false
             }
 
@@ -76,31 +73,26 @@ Item {
 
             PropertyChanges {
                 target:  snowImage1
-                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage2
-                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage3
-                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage4
-                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage5
-                enabled: false
                 visible: false
             }
         },
@@ -110,31 +102,26 @@ Item {
 
             PropertyChanges {
                 target:  snowImage1
-                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage2
-                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage3
-                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage4
-                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage5
-                enabled: false
                 visible: false
             }
         },
@@ -144,31 +131,26 @@ Item {
 
             PropertyChanges {
                 target:  snowImage1
-                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage2
-                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage3
-                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage4
-                enabled: false
                 visible: false
             }
 
             PropertyChanges {
                 target:  snowImage5
-                enabled: false
                 visible: false
             }
         },
@@ -178,31 +160,26 @@ Item {
 
             PropertyChanges {
                 target:  snowImage1
-                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage2
-                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage3
-                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage4
-                enabled: true
                 visible: true
             }
 
             PropertyChanges {
                 target:  snowImage5
-                enabled: true
                 visible: true
             }
         }
@@ -285,48 +262,26 @@ Item {
     }
 
     onAppInForegroundChanged: {
-        if (appInForeground && pageActive) {
-            var background_num = parseInt(mainWindow.getSetting("BackgroundNum", "1"), 10);
-
-            if (background_num <= maxBackgroundNum) {
-                currentBackgroundNum = background_num;
-            }
-
+        if (appInForeground) {
             buttonImageRow.visible = true;
-
-            helpOnStartupTimer.restart();
-            snowflakesCountTimer.restart();
-            snowflakesAngleVelocityTimer.restart();
         }
     }
 
-    onPageActiveChanged: {
-        if (appInForeground && pageActive) {
-            var background_num = parseInt(mainWindow.getSetting("BackgroundNum", "1"), 10);
-
-            if (background_num <= maxBackgroundNum) {
-                currentBackgroundNum = background_num;
-            }
-
-            buttonImageRow.visible = true;
-
-            helpOnStartupTimer.restart();
-            snowflakesCountTimer.restart();
-            snowflakesAngleVelocityTimer.restart();
-        }
+    onCurrentBackgroundNumChanged: {
+        mainWindow.setSetting("BackgroundNum", currentBackgroundNum.toString(10));
     }
 
-    onBigSnowflakesCountChanged: {
-        if (bigSnowflakesCount > (maxBigSnowflakesCount * 4) / 5) {
-            state = "snowLevel0";
-        } else if (bigSnowflakesCount > (maxBigSnowflakesCount * 3) / 5) {
-            state = "snowLevel1";
-        } else if (bigSnowflakesCount > (maxBigSnowflakesCount * 2) / 5) {
-            state = "snowLevel2";
-        } else if (bigSnowflakesCount > (maxBigSnowflakesCount * 1) / 5) {
-            state = "snowLevel3";
+    function pageState(big_snowflakes_count, max_big_snowflakes_count) {
+        if (big_snowflakes_count > (max_big_snowflakes_count * 4) / 5) {
+            return "snowLevel0";
+        } else if (big_snowflakes_count > (max_big_snowflakes_count * 3) / 5) {
+            return "snowLevel1";
+        } else if (big_snowflakes_count > (max_big_snowflakes_count * 2) / 5) {
+            return "snowLevel2";
+        } else if (big_snowflakes_count > (max_big_snowflakes_count * 1) / 5) {
+            return "snowLevel3";
         } else {
-            state = "snowLevel4";
+            return "snowLevel4";
         }
     }
 
@@ -355,10 +310,6 @@ Item {
 
             waitRectangle.visible = false;
         }
-    }
-
-    function shareToViewCompleted() {
-        StoreHelper.requestReview();
     }
 
     Audio {
@@ -624,217 +575,217 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem1
-                running: snowPage.pageActive
+                running: snowPage.appInForeground && snowPage.pageActive
             }
 
             Emitter {
                 anchors.fill: parent
                 system:       particleSystem1
                 lifeSpan:     1000
-                size:         32
+                size:         UtilScript.pt(32)
                 emitRate:     snowPage.bigSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: 10
+                    magnitudeVariation: UtilScript.pt(10)
                 }
 
                 ImageParticle {
                     z:       10
-                    opacity: 0.75
                     system:  particleSystem1
                     source:  "qrc:/resources/images/snow/snowflake-1-big.png"
+                    opacity: 0.75
                 }
             }
 
             ParticleSystem {
                 id:      particleSystem2
-                running: snowPage.pageActive
+                running: snowPage.appInForeground && snowPage.pageActive
             }
 
             Emitter {
                 anchors.fill: parent
                 system:       particleSystem2
                 lifeSpan:     1000
-                size:         32
+                size:         UtilScript.pt(32)
                 emitRate:     snowPage.bigSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: 10
+                    magnitudeVariation: UtilScript.pt(10)
                 }
 
                 ImageParticle {
                     z:       10
-                    opacity: 0.75
                     system:  particleSystem2
                     source:  "qrc:/resources/images/snow/snowflake-2-big.png"
+                    opacity: 0.75
                 }
             }
 
             ParticleSystem {
                 id:      particleSystem3
-                running: snowPage.pageActive
+                running: snowPage.appInForeground && snowPage.pageActive
             }
 
             Emitter {
                 anchors.fill: parent
                 system:       particleSystem3
                 lifeSpan:     1000
-                size:         32
+                size:         UtilScript.pt(32)
                 emitRate:     snowPage.bigSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: 10
+                    magnitudeVariation: UtilScript.pt(10)
                 }
 
                 ImageParticle {
                     z:       10
-                    opacity: 0.75
                     system:  particleSystem3
                     source:  "qrc:/resources/images/snow/snowflake-3-big.png"
+                    opacity: 0.75
                 }
             }
 
             ParticleSystem {
                 id:      particleSystem4
-                running: snowPage.pageActive
+                running: snowPage.appInForeground && snowPage.pageActive
             }
 
             Emitter {
                 anchors.fill: parent
                 system:       particleSystem4
                 lifeSpan:     1000
-                size:         32
+                size:         UtilScript.pt(32)
                 emitRate:     snowPage.bigSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: 10
+                    magnitudeVariation: UtilScript.pt(10)
                 }
 
                 ImageParticle {
                     z:       10
-                    opacity: 0.75
                     system:  particleSystem2
                     source:  "qrc:/resources/images/snow/snowflake-4-big.png"
+                    opacity: 0.75
                 }
             }
 
             ParticleSystem {
                 id:      particleSystem5
-                running: snowPage.pageActive
+                running: snowPage.appInForeground && snowPage.pageActive
             }
 
             Emitter {
                 anchors.fill: parent
                 system:       particleSystem5
                 lifeSpan:     1000
-                size:         16
+                size:         UtilScript.pt(16)
                 emitRate:     snowPage.smallSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: 10
+                    magnitudeVariation: UtilScript.pt(10)
                 }
 
                 ImageParticle {
                     z:       10
-                    opacity: 0.75
                     system:  particleSystem5
                     source:  "qrc:/resources/images/snow/snowflake-1-small.png"
+                    opacity: 0.75
                 }
             }
 
             ParticleSystem {
                 id:      particleSystem6
-                running: snowPage.pageActive
+                running: snowPage.appInForeground && snowPage.pageActive
             }
 
             Emitter {
                 anchors.fill: parent
                 system:       particleSystem6
                 lifeSpan:     1000
-                size:         16
+                size:         UtilScript.pt(16)
                 emitRate:     snowPage.smallSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: 10
+                    magnitudeVariation: UtilScript.pt(10)
                 }
 
                 ImageParticle {
                     z:       10
-                    opacity: 0.75
                     system:  particleSystem6
                     source:  "qrc:/resources/images/snow/snowflake-2-small.png"
+                    opacity: 0.75
                 }
             }
 
             ParticleSystem {
                 id:      particleSystem7
-                running: snowPage.pageActive
+                running: snowPage.appInForeground && snowPage.pageActive
             }
 
             Emitter {
                 anchors.fill: parent
                 system:       particleSystem7
                 lifeSpan:     1000
-                size:         16
+                size:         UtilScript.pt(16)
                 emitRate:     snowPage.smallSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: 10
+                    magnitudeVariation: UtilScript.pt(10)
                 }
 
                 ImageParticle {
                     z:       10
-                    opacity: 0.75
                     system:  particleSystem7
                     source:  "qrc:/resources/images/snow/snowflake-3-small.png"
+                    opacity: 0.75
                 }
             }
 
             ParticleSystem {
                 id:      particleSystem8
-                running: snowPage.pageActive
+                running: snowPage.appInForeground && snowPage.pageActive
             }
 
             Emitter {
                 anchors.fill: parent
                 system:       particleSystem8
                 lifeSpan:     1000
-                size:         16
+                size:         UtilScript.pt(16)
                 emitRate:     snowPage.smallSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: 10
+                    magnitudeVariation: UtilScript.pt(10)
                 }
 
                 ImageParticle {
                     z:       10
-                    opacity: 0.75
                     system:  particleSystem8
                     source:  "qrc:/resources/images/snow/snowflake-4-small.png"
+                    opacity: 0.75
                 }
             }
 
@@ -879,15 +830,16 @@ Item {
             id:                       buttonImageRow
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin:     30
+            anchors.bottomMargin:     UtilScript.pt(30)
             z:                        1
-            spacing:                  16
+            spacing:                  UtilScript.pt(16)
 
             Image {
-                id:     settingsButtonImage
-                width:  64
-                height: 64
-                source: "qrc:/resources/images/snow/button_settings.png"
+                id:       settingsButtonImage
+                width:    UtilScript.pt(64)
+                height:   UtilScript.pt(64)
+                source:   "qrc:/resources/images/snow/button_settings.png"
+                fillMode: Image.PreserveAspectFit
 
                 MouseArea {
                     id:           settingsButtonMouseArea
@@ -906,10 +858,11 @@ Item {
             }
 
             Image {
-                id:     captureImageButtonImage
-                width:  64
-                height: 64
-                source: "qrc:/resources/images/snow/button_capture_image.png"
+                id:       captureImageButtonImage
+                width:    UtilScript.pt(64)
+                height:   UtilScript.pt(64)
+                source:   "qrc:/resources/images/snow/button_capture_image.png"
+                fillMode: Image.PreserveAspectFit
 
                 MouseArea {
                     id:           captureImageButtonMouseArea
@@ -922,10 +875,11 @@ Item {
             }
 
             Image {
-                id:     captureGIFButtonImage
-                width:  64
-                height: 64
-                source: "qrc:/resources/images/snow/button_capture_gif.png"
+                id:       captureGIFButtonImage
+                width:    UtilScript.pt(64)
+                height:   UtilScript.pt(64)
+                source:   "qrc:/resources/images/snow/button_capture_gif.png"
+                fillMode: Image.PreserveAspectFit
 
                 MouseArea {
                     id:           captureGIFButtonMouseArea
@@ -938,10 +892,11 @@ Item {
             }
 
             Image {
-                id:     helpButtonImage
-                width:  64
-                height: 64
-                source: "qrc:/resources/images/snow/button_help.png"
+                id:       helpButtonImage
+                width:    UtilScript.pt(64)
+                height:   UtilScript.pt(64)
+                source:   "qrc:/resources/images/snow/button_help.png"
+                fillMode: Image.PreserveAspectFit
 
                 MouseArea {
                     id:           helpButtonMouseArea
@@ -958,11 +913,11 @@ Item {
             id:                     settingsListRectangle
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
-            width:                  96
-            height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
             z:                      2
-            clip:                   true
+            width:                  UtilScript.pt(96)
+            height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
             color:                  "black"
+            clip:                   true
             opacity:                0.75
             visible:                false
 
@@ -976,10 +931,11 @@ Item {
                 }
 
                 delegate: Image {
-                    id:     settingsItemDelegate
-                    width:  settingsListRectangle.width
-                    height: sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
-                    source: "qrc:/resources/images/snow/bg-%1.png".arg(settingNumber)
+                    id:       settingsItemDelegate
+                    width:    settingsListRectangle.width
+                    height:   sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
+                    source:   "qrc:/resources/images/snow/bg-%1.png".arg(settingNumber)
+                    fillMode: Image.PreserveAspectFit
 
                     MouseArea {
                         id:           settingsItemMouseArea
@@ -992,8 +948,6 @@ Item {
                                 snowPage.smallSnowflakesCount = snowPage.maxSmallSnowflakesCount;
 
                                 snowPage.resetParticleSystems();
-
-                                mainWindow.setSetting("BackgroundNum", snowPage.currentBackgroundNum.toString(10));
                             } else {
                                 purchaseDialog.open();
                             }
@@ -1030,11 +984,11 @@ Item {
         id: purchaseDialog
         z:  1
 
-        onPurchaseFullVersion: {
+        onPurchaseFullVersionSelected: {
             fullVersionProduct.purchase();
         }
 
-        onRestorePurchases: {
+        onRestorePurchasesSelected: {
             store.restorePurchases();
         }
     }
@@ -1068,19 +1022,6 @@ Item {
             lastReadingX = reading.x;
             lastReadingY = reading.y;
             lastReadingZ = reading.z;
-        }
-    }
-
-    Timer {
-        id:       helpOnStartupTimer
-        interval: 100
-
-        onTriggered: {
-            if (mainWindow.getSetting("ShowHelpOnStartup", "true") === "true") {
-                helpDialog.open();
-            }
-
-            mainWindow.setSetting("ShowHelpOnStartup", "false");
         }
     }
 
@@ -1131,6 +1072,7 @@ Item {
 
     Timer {
         id:       snowflakesCountTimer
+        running:  true
         interval: 1000
         repeat:   true
 
@@ -1146,6 +1088,7 @@ Item {
 
     Timer {
         id:       snowflakesAngleVelocityTimer
+        running:  true
         interval: 100
         repeat:   true
 
@@ -1159,13 +1102,31 @@ Item {
         }
     }
 
+    Connections {
+        target: ShareHelper
+
+        onShareToViewCompleted: {
+            StoreHelper.requestReview();
+        }
+    }
+
     Component.onCompleted: {
-        ShareHelper.shareToViewCompleted.connect(shareToViewCompleted);
+        var background_num = parseInt(mainWindow.getSetting("BackgroundNum", "1"), 10);
+
+        if (background_num <= maxBackgroundNum) {
+            currentBackgroundNum = background_num;
+        }
 
         settingsListModel.clear();
 
         for (var i = 1; i <= snowPage.maxBackgroundNum; i++) {
             settingsListModel.append({"settingType": "background", "settingNumber": i});
+        }
+
+        if (mainWindow.getSetting("ShowHelpOnStartup", "true") === "true") {
+            helpDialog.open();
+
+            mainWindow.setSetting("ShowHelpOnStartup", "false");
         }
     }
 }

@@ -1,31 +1,23 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 Image {
-    id:     spark
-    width:  sourceSize.width
-    height: sourceSize.height
-    source: "qrc:/resources/images/snow/sparks/spark_%1.png".arg(sparkType)
+    id:       spark
+    width:    UtilScript.pt(sourceSize.width)
+    height:   UtilScript.pt(sourceSize.height)
+    source:   "qrc:/resources/images/snow/sparks/spark_%1.png".arg(sparkType)
+    fillMode: Image.PreserveAspectFit
 
     readonly property int maxSparkType: 7
 
     property int sparkType:             1
 
     SequentialAnimation {
-        id: sparkSequentialAnimation
+        id:    sparkSequentialAnimation
+        loops: Animation.Infinite
 
-        onStopped: {
-            var spark_type = spark.sparkType + 1;
-
-            if (spark_type > spark.maxSparkType) {
-                spark_type = 1;
-            }
-
-            spark.sparkType = spark_type;
-
-            start();
-        }
-
-        PropertyAnimation {
+        NumberAnimation {
             target:   spark
             property: "opacity"
             from:     0.4
@@ -33,25 +25,34 @@ Image {
             duration: 1000
         }
 
-        PropertyAnimation {
+        NumberAnimation {
             target:   spark
             property: "opacity"
             from:     0.0
             to:       0.4
             duration: 1000
         }
+
+        ScriptAction {
+            script: {
+                var spark_type = spark.sparkType + 1;
+
+                if (spark_type > spark.maxSparkType) {
+                    spark_type = 1;
+                }
+
+                spark.sparkType = spark_type;
+            }
+        }
     }
 
     Timer {
         id:       sparkAnimationTimer
+        running:  true
         interval: 5000 + Math.floor(5000 * Math.random())
 
         onTriggered: {
             sparkSequentialAnimation.start();
         }
-    }
-
-    Component.onCompleted: {
-        sparkAnimationTimer.start();
     }
 }

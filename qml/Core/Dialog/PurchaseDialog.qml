@@ -1,53 +1,34 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 MultiPointTouchArea {
     id:               purchaseDialog
     anchors.centerIn: parent
+    width:            dialogWidth(rotation, parent.width, parent.height)
+    height:           dialogHeight(rotation, parent.width, parent.height)
     visible:          false
-
-    readonly property int parentWidth:  parent.width
-    readonly property int parentHeight: parent.height
 
     signal opened()
     signal closed()
 
-    signal purchaseFullVersion()
-    signal restorePurchases()
-    signal cancel()
+    signal purchaseFullVersionSelected()
+    signal restorePurchasesSelected()
+    signal cancelled()
 
-    onParentWidthChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
+    function dialogWidth(rotation, parent_width, parent_height) {
+        if (rotation === 90 || rotation === 270) {
+            return parent_height;
+        } else {
+            return parent_width;
         }
     }
 
-    onParentHeightChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
-        }
-    }
-
-    onRotationChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
+    function dialogHeight(rotation, parent_width, parent_height) {
+        if (rotation === 90 || rotation === 270) {
+            return parent_width;
+        } else {
+            return parent_height;
         }
     }
 
@@ -60,22 +41,28 @@ MultiPointTouchArea {
     function close() {
         visible = false;
 
-        cancel();
+        cancelled();
         closed();
     }
 
     Image {
         id:               dialogImage
         anchors.centerIn: parent
+        width:            UtilScript.pt(sourceSize.width)
+        height:           UtilScript.pt(sourceSize.height)
         source:           "qrc:/resources/images/dialog/purchase_dialog.png"
+        fillMode:         Image.PreserveAspectFit
 
         Column {
             anchors.centerIn: parent
-            spacing:          8
+            spacing:          UtilScript.pt(8)
 
             Image {
-                id:     purchaseFullVersionButtonImage
-                source: "qrc:/resources/images/dialog/purchase_dialog_button.png"
+                id:       purchaseFullVersionButtonImage
+                width:    UtilScript.pt(sourceSize.width)
+                height:   UtilScript.pt(sourceSize.height)
+                source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
+                fillMode: Image.PreserveAspectFit
 
                 MouseArea {
                     anchors.fill: parent
@@ -83,22 +70,22 @@ MultiPointTouchArea {
                     onClicked: {
                         purchaseDialog.visible = false;
 
-                        purchaseDialog.purchaseFullVersion();
+                        purchaseDialog.purchaseFullVersionSelected();
                         purchaseDialog.closed();
                     }
                 }
 
                 Row {
                     anchors.fill: parent
-                    leftPadding:  4
-                    rightPadding: 4
-                    spacing:      4
+                    leftPadding:  UtilScript.pt(4)
+                    rightPadding: UtilScript.pt(4)
+                    spacing:      UtilScript.pt(4)
 
                     Image {
                         id:                     purchaseFullVersionImage
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
-                        height:                 parent.height - 8
+                        height:                 parent.height - UtilScript.pt(8)
                         source:                 "qrc:/resources/images/dialog/purchase_dialog_purchase.png"
                         fillMode:               Image.PreserveAspectFit
                     }
@@ -107,7 +94,7 @@ MultiPointTouchArea {
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  parent.width - purchaseFullVersionImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
-                        height:                 parent.height - 8
+                        height:                 parent.height - UtilScript.pt(8)
                         text:                   qsTr("Purchase full version")
                         color:                  "black"
                         font.pointSize:         16
@@ -122,8 +109,11 @@ MultiPointTouchArea {
             }
 
             Image {
-                id:     restorePurchasesButtonImage
-                source: "qrc:/resources/images/dialog/purchase_dialog_button.png"
+                id:       restorePurchasesButtonImage
+                width:    UtilScript.pt(sourceSize.width)
+                height:   UtilScript.pt(sourceSize.height)
+                source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
+                fillMode: Image.PreserveAspectFit
 
                 MouseArea {
                     anchors.fill: parent
@@ -131,22 +121,22 @@ MultiPointTouchArea {
                     onClicked: {
                         purchaseDialog.visible = false;
 
-                        purchaseDialog.restorePurchases();
+                        purchaseDialog.restorePurchasesSelected();
                         purchaseDialog.closed();
                     }
                 }
 
                 Row {
                     anchors.fill: parent
-                    leftPadding:  4
-                    rightPadding: 4
-                    spacing:      4
+                    leftPadding:  UtilScript.pt(4)
+                    rightPadding: UtilScript.pt(4)
+                    spacing:      UtilScript.pt(4)
 
                     Image {
                         id:                     restorePurchasesImage
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
-                        height:                 parent.height - 8
+                        height:                 parent.height - UtilScript.pt(8)
                         source:                 "qrc:/resources/images/dialog/purchase_dialog_restore.png"
                         fillMode:               Image.PreserveAspectFit
                     }
@@ -155,7 +145,7 @@ MultiPointTouchArea {
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  parent.width - restorePurchasesImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
-                        height:                 parent.height - 8
+                        height:                 parent.height - UtilScript.pt(8)
                         text:                   qsTr("Restore purchases")
                         color:                  "black"
                         font.pointSize:         16
@@ -175,10 +165,11 @@ MultiPointTouchArea {
         id:                       cancelButtonImage
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
-        width:                    64
-        height:                   64
         z:                        1
+        width:                    UtilScript.pt(64)
+        height:                   UtilScript.pt(64)
         source:                   "qrc:/resources/images/dialog/cancel.png"
+        fillMode:                 Image.PreserveAspectFit
 
         MouseArea {
             anchors.fill: parent
@@ -186,7 +177,7 @@ MultiPointTouchArea {
             onClicked: {
                 purchaseDialog.visible = false;
 
-                purchaseDialog.cancel();
+                purchaseDialog.cancelled();
                 purchaseDialog.closed();
             }
         }
