@@ -1,52 +1,33 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 
+import "../../Util.js" as UtilScript
+
 MultiPointTouchArea {
     id:               helpDialog
     anchors.centerIn: parent
+    width:            dialogWidth(rotation, parent.width, parent.height)
+    height:           dialogHeight(rotation, parent.width, parent.height)
     visible:          false
-
-    readonly property int parentWidth:  parent.width
-    readonly property int parentHeight: parent.height
 
     signal opened()
     signal closed()
 
     signal ok()
 
-    onParentWidthChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
+    function dialogWidth(rotation, parent_width, parent_height) {
+        if (rotation === 90 || rotation === 270) {
+            return parent_height;
+        } else {
+            return parent_width;
         }
     }
 
-    onParentHeightChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
-        }
-    }
-
-    onRotationChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
+    function dialogHeight(rotation, parent_width, parent_height) {
+        if (rotation === 90 || rotation === 270) {
+            return parent_width;
+        } else {
+            return parent_height;
         }
     }
 
@@ -66,13 +47,16 @@ MultiPointTouchArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
+        width:            UtilScript.pt(sourceSize.width)
+        height:           UtilScript.pt(sourceSize.height)
         source:           "qrc:/resources/images/dialog/help_dialog.png"
+        fillMode:         Image.PreserveAspectFit
 
         Flickable {
             id:                   helpTextFlickable
             anchors.fill:         parent
-            anchors.margins:      24
-            anchors.bottomMargin: 40
+            anchors.margins:      UtilScript.pt(16)
+            anchors.bottomMargin: UtilScript.pt(40)
             contentWidth:         helpText.width
             contentHeight:        helpText.height
             clip:                 true
@@ -82,16 +66,16 @@ MultiPointTouchArea {
             }
 
             Text {
-                id:                   helpText
-                width:                helpTextFlickable.width
-                text:                 "<b>" + qsTr("Christmas Snow Scenes") + "</b>" + "<br><br>" +
-                                              qsTr("Have fun with a variety of Christmas Snow Scenes. Press Settings button to select a scene. Shake your phone to cause a snowfall. Control wind speed and direction by sliding your finger across a screen. Double tap on screen to hide buttons or show them again.")
-                color:                "black"
-                font.pixelSize:      24
+                id:                  helpText
+                width:               helpTextFlickable.width
+                text:                "<b>" + qsTr("Christmas Snow Scenes") + "</b>" + "<br><br>" +
+                                             qsTr("Have fun with a variety of Christmas Snow Scenes. Press Settings button to select a scene. Shake your phone to cause a snowfall. Control wind speed and direction by sliding your finger across a screen. Double tap on screen to hide buttons or show them again.")
+                color:               "black"
+                font.pointSize:      20
                 font.family:         "Helvetica"
-                horizontalAlignment:  Text.AlignHCenter
-                verticalAlignment:    Text.AlignVCenter
-                wrapMode:             Text.Wrap
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment:   Text.AlignVCenter
+                wrapMode:            Text.Wrap
             }
         }
     }
@@ -100,10 +84,11 @@ MultiPointTouchArea {
         id:                       okButtonImage
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
-        width:                    64
-        height:                   64
         z:                        1
+        width:                    UtilScript.pt(64)
+        height:                   UtilScript.pt(64)
         source:                   "qrc:/resources/images/dialog/ok.png"
+        fillMode:                 Image.PreserveAspectFit
 
         MouseArea {
             anchors.fill: parent
