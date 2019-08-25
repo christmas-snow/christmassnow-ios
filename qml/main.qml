@@ -6,8 +6,6 @@ import QtPurchasing 1.0
 
 import "Core/Dialog"
 
-import "BuildSettings.js" as BuildSettingsScript
-
 ApplicationWindow {
     id:         mainWindow
     title:      qsTr("Snow Scenes")
@@ -155,13 +153,8 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        if (BuildSettingsScript.VERSION_FULL) {
-            fullVersion = true;
-        } else {
-            fullVersion = (getSetting("FullVersion", "false") === "true");
-        }
-
-        adMobConsent = getSetting("AdMobConsent", "");
+        fullVersion  = (getSetting("FullVersion",  "false") === "true");
+        adMobConsent =  getSetting("AdMobConsent", "");
 
         updateFeatures();
 

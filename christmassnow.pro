@@ -52,7 +52,9 @@ ios {
             -framework GoogleAppMeasurement \
             -framework GoogleMobileAds \
             -framework GoogleUtilities \
-            -framework nanopb
+            -framework nanopb \
+            -framework UIKit \
+            -framework StoreKit
 
     QMAKE_LFLAGS += -ObjC
 
