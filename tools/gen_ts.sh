@@ -2,23 +2,23 @@
 
 PATH=$PATH:~/Qt/5.13.0/ios/bin
 
-lupdate ../christmassnow.pro -ts ../translations/christmassnow_ru.src.ts
-lupdate ../qml               -ts ../translations/christmassnow_ru.qml.ts
+lupdate -locations absolute ../christmassnow.pro -ts ../translations/christmassnow_ru.src.ts
+lupdate -locations absolute ../qml               -ts ../translations/christmassnow_ru.qml.ts
 
-lupdate ../christmassnow.pro -ts ../translations/christmassnow_de.src.ts
-lupdate ../qml               -ts ../translations/christmassnow_de.qml.ts
+lupdate -locations absolute ../christmassnow.pro -ts ../translations/christmassnow_de.src.ts
+lupdate -locations absolute ../qml               -ts ../translations/christmassnow_de.qml.ts
 
-lupdate ../christmassnow.pro -ts ../translations/christmassnow_fr.src.ts
-lupdate ../qml               -ts ../translations/christmassnow_fr.qml.ts
+lupdate -locations absolute ../christmassnow.pro -ts ../translations/christmassnow_fr.src.ts
+lupdate -locations absolute ../qml               -ts ../translations/christmassnow_fr.qml.ts
 
-lupdate ../christmassnow.pro -ts ../translations/christmassnow_zh.src.ts
-lupdate ../qml               -ts ../translations/christmassnow_zh.qml.ts
+lupdate -locations absolute ../christmassnow.pro -ts ../translations/christmassnow_zh.src.ts
+lupdate -locations absolute ../qml               -ts ../translations/christmassnow_zh.qml.ts
 
-lupdate ../christmassnow.pro -ts ../translations/christmassnow_es.src.ts
-lupdate ../qml               -ts ../translations/christmassnow_es.qml.ts
+lupdate -locations absolute ../christmassnow.pro -ts ../translations/christmassnow_es.src.ts
+lupdate -locations absolute ../qml               -ts ../translations/christmassnow_es.qml.ts
 
-lupdate ../christmassnow.pro -ts ../translations/christmassnow_it.src.ts
-lupdate ../qml               -ts ../translations/christmassnow_it.qml.ts
+lupdate -locations absolute ../christmassnow.pro -ts ../translations/christmassnow_it.src.ts
+lupdate -locations absolute ../qml               -ts ../translations/christmassnow_it.qml.ts
 
 lconvert ../translations/christmassnow_ru.src.ts ../translations/christmassnow_ru.qml.ts -o ../translations/christmassnow_ru.ts
 lconvert ../translations/christmassnow_de.src.ts ../translations/christmassnow_de.qml.ts -o ../translations/christmassnow_de.ts
