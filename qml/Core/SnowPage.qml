@@ -17,7 +17,6 @@ Item {
     readonly property bool appInForeground:        Qt.application.state === Qt.ApplicationActive
     readonly property bool pageActive:             StackView.status === StackView.Active
 
-    readonly property int bannerViewHeight:        AdMobHelper.bannerViewHeight
     readonly property int maxBackgroundNum:        3
     readonly property int maxBigSnowflakesCount:   10
     readonly property int maxSmallSnowflakesCount: 80
@@ -826,28 +825,6 @@ Item {
             }
         }
 
-        Image {
-            id:                  adSettingsButtonImage
-            anchors.top:         parent.top
-            anchors.right:       parent.right
-            anchors.topMargin:   Math.max(snowPage.bannerViewHeight + UtilScript.pt(8), UtilScript.pt(34))
-            anchors.rightMargin: UtilScript.pt(8)
-            z:                   1
-            width:               UtilScript.pt(32)
-            height:              UtilScript.pt(32)
-            source:              "qrc:/resources/images/snow/button_ad_settings.png"
-            fillMode:            Image.PreserveAspectFit
-
-            MouseArea {
-                id:           adSettingsButtonMouseArea
-                anchors.fill: parent
-
-                onClicked: {
-                    adMobConsentDialog.open();
-                }
-            }
-        }
-
         Row {
             id:                       buttonImageRow
             anchors.bottom:           parent.bottom
@@ -964,15 +941,11 @@ Item {
                         anchors.fill: parent
 
                         onClicked: {
-                            if (mainWindow.fullVersion || settingNumber === 1) {
-                                snowPage.currentBackgroundNum = settingNumber;
-                                snowPage.bigSnowflakesCount   = snowPage.maxBigSnowflakesCount;
-                                snowPage.smallSnowflakesCount = snowPage.maxSmallSnowflakesCount;
+                            snowPage.currentBackgroundNum = settingNumber;
+                            snowPage.bigSnowflakesCount   = snowPage.maxBigSnowflakesCount;
+                            snowPage.smallSnowflakesCount = snowPage.maxSmallSnowflakesCount;
 
-                                snowPage.resetParticleSystems();
-                            } else {
-                                purchaseDialog.open();
-                            }
+                            snowPage.resetParticleSystems();
                         }
                     }
                 }
@@ -1000,19 +973,6 @@ Item {
                  anchors.fill: parent
              }
          }
-    }
-
-    PurchaseDialog {
-        id: purchaseDialog
-        z:  1
-
-        onPurchaseFullVersionSelected: {
-            fullVersionProduct.purchase();
-        }
-
-        onRestorePurchasesSelected: {
-            store.restorePurchases();
-        }
     }
 
     HelpDialog {

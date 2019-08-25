@@ -1,13 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/images/dialog/admob_consent_dialog.png</file>
-        <file>resources/images/dialog/cancel.png</file>
         <file>resources/images/dialog/help_dialog.png</file>
         <file>resources/images/dialog/ok.png</file>
-        <file>resources/images/dialog/purchase_dialog.png</file>
-        <file>resources/images/dialog/purchase_dialog_button.png</file>
-        <file>resources/images/dialog/purchase_dialog_purchase.png</file>
-        <file>resources/images/dialog/purchase_dialog_restore.png</file>
         <file>resources/images/snow/bg-1-1.png</file>
         <file>resources/images/snow/bg-1-2.png</file>
         <file>resources/images/snow/bg-1-3.png</file>
@@ -23,7 +17,6 @@
         <file>resources/images/snow/bg-3-3.png</file>
         <file>resources/images/snow/bg-3-4.png</file>
         <file>resources/images/snow/bg-3.png</file>
-        <file>resources/images/snow/button_ad_settings.png</file>
         <file>resources/images/snow/button_capture_gif.png</file>
         <file>resources/images/snow/button_capture_image.png</file>
         <file>resources/images/snow/button_help.png</file>
