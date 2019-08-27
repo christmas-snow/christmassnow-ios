@@ -1030,15 +1030,14 @@ Item {
         property real lastReadingZ: 0.0
 
         onReadingChanged: {
-            if (lastReadingX !== 0.0 || lastReadingY !== 0.0 || lastReadingZ !== 0.0) {
-                if (Math.abs(reading.x - lastReadingX) > snowPage.accelShakeThreshold ||
-                    Math.abs(reading.y - lastReadingY) > snowPage.accelShakeThreshold ||
-                    Math.abs(reading.z - lastReadingZ) > snowPage.accelShakeThreshold) {
-                    snowPage.bigSnowflakesCount   = snowPage.maxBigSnowflakesCount;
-                    snowPage.smallSnowflakesCount = snowPage.maxSmallSnowflakesCount;
+            if ((lastReadingX !== 0.0 || lastReadingY !== 0.0 || lastReadingZ !== 0.0) &&
+                (Math.abs(reading.x - lastReadingX) > snowPage.accelShakeThreshold ||
+                 Math.abs(reading.y - lastReadingY) > snowPage.accelShakeThreshold ||
+                 Math.abs(reading.z - lastReadingZ) > snowPage.accelShakeThreshold)) {
+                snowPage.bigSnowflakesCount   = snowPage.maxBigSnowflakesCount;
+                snowPage.smallSnowflakesCount = snowPage.maxSmallSnowflakesCount;
 
-                    snowPage.resetParticleSystems();
-                }
+                snowPage.resetParticleSystems();
             }
 
             lastReadingX = reading.x;
