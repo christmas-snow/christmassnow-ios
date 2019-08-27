@@ -45,8 +45,7 @@ void SparkCreator::setImageFilePath(const QString &file_path)
 {
     ImageFilePath = file_path;
 
-    if (!ImageFilePath.isEmpty())
-    {
+    if (!ImageFilePath.isEmpty()) {
         QImage image(ImageFilePath);
 
         if (!image.isNull()) {
