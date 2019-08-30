@@ -793,26 +793,26 @@ Item {
                 anchors.fill: parent
                 z:            15
 
-                property int pressedX:       0
-                property int pressedY:       0
+                property int pressingX:       0
+                property int pressingY:       0
 
-                property double pressedTime: (new Date()).getTime()
+                property double pressingTime: (new Date()).getTime()
 
                 onPositionChanged: {
-                    var denom = (new Date()).getTime() - pressedTime;
+                    var denom = (new Date()).getTime() - pressingTime;
 
                     if (denom > 0) {
-                        var velocity = Math.sqrt(Math.pow(mouse.x - pressedX, 2) + Math.pow(mouse.y - pressedY, 2)) * 1000 / denom;
+                        var velocity = Math.sqrt(Math.pow(mouse.x - pressingX, 2) + Math.pow(mouse.y - pressingY, 2)) * 1000 / denom;
 
-                        snowPage.snowflakesAngle    = (Math.atan2(mouse.y - pressedY, mouse.x - pressedX) * 180) / Math.PI;
+                        snowPage.snowflakesAngle    = (Math.atan2(mouse.y - pressingY, mouse.x - pressingX) * 180) / Math.PI;
                         snowPage.snowflakesVelocity = velocity < snowPage.maxSnowflakesVelocity ? velocity : snowPage.maxSnowflakesVelocity;
                     }
                 }
 
                 onPressed: {
-                    pressedX    = mouse.x;
-                    pressedY    = mouse.y;
-                    pressedTime = (new Date()).getTime();
+                    pressingX    = mouse.x;
+                    pressingY    = mouse.y;
+                    pressingTime = (new Date()).getTime();
                 }
 
                 onDoubleClicked: {
