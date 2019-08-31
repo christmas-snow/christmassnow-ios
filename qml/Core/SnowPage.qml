@@ -793,26 +793,26 @@ Item {
                 anchors.fill: parent
                 z:            15
 
-                property int pressingX:       0
-                property int pressingY:       0
+                property int pressEventX:       0
+                property int pressEventY:       0
 
-                property double pressingTime: (new Date()).getTime()
-
-                onPositionChanged: {
-                    var denom = (new Date()).getTime() - pressingTime;
-
-                    if (denom > 0) {
-                        var velocity = Math.sqrt(Math.pow(mouse.x - pressingX, 2) + Math.pow(mouse.y - pressingY, 2)) * 1000 / denom;
-
-                        snowPage.snowflakesAngle    = (Math.atan2(mouse.y - pressingY, mouse.x - pressingX) * 180) / Math.PI;
-                        snowPage.snowflakesVelocity = velocity < snowPage.maxSnowflakesVelocity ? velocity : snowPage.maxSnowflakesVelocity;
-                    }
-                }
+                property double pressEventTime: (new Date()).getTime()
 
                 onPressed: {
-                    pressingX    = mouse.x;
-                    pressingY    = mouse.y;
-                    pressingTime = (new Date()).getTime();
+                    pressEventX    = mouse.x;
+                    pressEventY    = mouse.y;
+                    pressEventTime = (new Date()).getTime();
+                }
+
+                onPositionChanged: {
+                    var denom = (new Date()).getTime() - pressEventTime;
+
+                    if (denom > 0) {
+                        var velocity = Math.sqrt(Math.pow(mouse.x - pressEventX, 2) + Math.pow(mouse.y - pressEventY, 2)) * 1000 / denom;
+
+                        snowPage.snowflakesAngle    = (Math.atan2(mouse.y - pressEventY, mouse.x - pressEventX) * 180) / Math.PI;
+                        snowPage.snowflakesVelocity = velocity < snowPage.maxSnowflakesVelocity ? velocity : snowPage.maxSnowflakesVelocity;
+                    }
                 }
 
                 onDoubleClicked: {
