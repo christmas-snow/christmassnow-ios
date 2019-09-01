@@ -590,13 +590,13 @@ Item {
                     magnitude:          snowPage.snowflakesVelocity
                     magnitudeVariation: UtilScript.pt(10)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem1
-                    source:  "qrc:/resources/images/snow/snowflake-1-big.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem1
+                source:  "qrc:/resources/images/snow/snowflake-1-big.png"
+                opacity: 0.75
             }
 
             ParticleSystem {
@@ -617,13 +617,13 @@ Item {
                     magnitude:          snowPage.snowflakesVelocity
                     magnitudeVariation: UtilScript.pt(10)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem2
-                    source:  "qrc:/resources/images/snow/snowflake-2-big.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem2
+                source:  "qrc:/resources/images/snow/snowflake-2-big.png"
+                opacity: 0.75
             }
 
             ParticleSystem {
@@ -644,13 +644,13 @@ Item {
                     magnitude:          snowPage.snowflakesVelocity
                     magnitudeVariation: UtilScript.pt(10)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem3
-                    source:  "qrc:/resources/images/snow/snowflake-3-big.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem3
+                source:  "qrc:/resources/images/snow/snowflake-3-big.png"
+                opacity: 0.75
             }
 
             ParticleSystem {
@@ -671,13 +671,13 @@ Item {
                     magnitude:          snowPage.snowflakesVelocity
                     magnitudeVariation: UtilScript.pt(10)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem2
-                    source:  "qrc:/resources/images/snow/snowflake-4-big.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem4
+                source:  "qrc:/resources/images/snow/snowflake-4-big.png"
+                opacity: 0.75
             }
 
             ParticleSystem {
@@ -698,13 +698,13 @@ Item {
                     magnitude:          snowPage.snowflakesVelocity
                     magnitudeVariation: UtilScript.pt(10)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem5
-                    source:  "qrc:/resources/images/snow/snowflake-1-small.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem5
+                source:  "qrc:/resources/images/snow/snowflake-1-small.png"
+                opacity: 0.75
             }
 
             ParticleSystem {
@@ -725,13 +725,13 @@ Item {
                     magnitude:          snowPage.snowflakesVelocity
                     magnitudeVariation: UtilScript.pt(10)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem6
-                    source:  "qrc:/resources/images/snow/snowflake-2-small.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem6
+                source:  "qrc:/resources/images/snow/snowflake-2-small.png"
+                opacity: 0.75
             }
 
             ParticleSystem {
@@ -752,13 +752,13 @@ Item {
                     magnitude:          snowPage.snowflakesVelocity
                     magnitudeVariation: UtilScript.pt(10)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem7
-                    source:  "qrc:/resources/images/snow/snowflake-3-small.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem7
+                source:  "qrc:/resources/images/snow/snowflake-3-small.png"
+                opacity: 0.75
             }
 
             ParticleSystem {
@@ -779,13 +779,13 @@ Item {
                     magnitude:          snowPage.snowflakesVelocity
                     magnitudeVariation: UtilScript.pt(10)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem8
-                    source:  "qrc:/resources/images/snow/snowflake-4-small.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem8
+                source:  "qrc:/resources/images/snow/snowflake-4-small.png"
+                opacity: 0.75
             }
 
             MouseArea {
