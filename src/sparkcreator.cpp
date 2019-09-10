@@ -11,7 +11,7 @@ SparkCreator::SparkCreator(QObject *parent) : QObject(parent)
 {
     MinSparksCount = 0;
     MaxSparksCount = 0;
-    ImageFilePath  = "";
+    ImageFilePath  = QStringLiteral("");
 
     qsrand(static_cast<uint>(QDateTime::currentMSecsSinceEpoch()));
 }
@@ -58,15 +58,15 @@ void SparkCreator::setImageFilePath(const QString &file_path)
                     if (color.alpha() > 200) {
                         QVariantMap pixel;
 
-                        pixel.insert("x", x);
-                        pixel.insert("y", y);
+                        pixel.insert(QStringLiteral("x"), x);
+                        pixel.insert(QStringLiteral("y"), y);
 
                         SnowPixels.append(pixel);
                     }
                 }
             }
         } else {
-            emit error(QString("Cannot open image file %1").arg(ImageFilePath));
+            emit error(QStringLiteral("Cannot open image file %1").arg(ImageFilePath));
         }
     }
 }
