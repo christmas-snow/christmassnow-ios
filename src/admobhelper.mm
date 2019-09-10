@@ -7,8 +7,8 @@
 
 #include "admobhelper.h"
 
-const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID("ca-app-pub-2455088855015693/9661812425");
-const QString AdMobHelper::ADMOB_TEST_DEVICE_ID    ("");
+const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID(QStringLiteral("ca-app-pub-2455088855015693/9661812425"));
+const QString AdMobHelper::ADMOB_TEST_DEVICE_ID    (QStringLiteral(""));
 
 static const NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 
@@ -108,7 +108,7 @@ static const NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 {
     GADRequest *request = [GADRequest request];
 
-    if (AdMobHelper::ADMOB_TEST_DEVICE_ID != "") {
+    if (AdMobHelper::ADMOB_TEST_DEVICE_ID != QStringLiteral("")) {
         request.testDevices = @[AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString()];
     }
 
