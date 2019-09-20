@@ -24,8 +24,8 @@ Item {
     readonly property int ceaseTime:               5000
 
     readonly property real defaultSnowflakesAngle: 90.0
-    readonly property real minSnowflakesVelocity:  UtilScript.pt(30.0)
-    readonly property real maxSnowflakesVelocity:  UtilScript.pt(360.0)
+    readonly property real minSnowflakesVelocity:  UtilScript.dp(30.0)
+    readonly property real maxSnowflakesVelocity:  UtilScript.dp(360.0)
     readonly property real accelShakeThreshold:    50.0
 
     property int currentBackgroundNum:             1
@@ -33,7 +33,7 @@ Item {
     property int smallSnowflakesCount:             80
 
     property real snowflakesAngle:                 90.0
-    property real snowflakesVelocity:              UtilScript.pt(30.0)
+    property real snowflakesVelocity:              UtilScript.dp(30.0)
 
     property var sparksList:                       null
 
@@ -582,14 +582,14 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem1
                 lifeSpan:     1000
-                size:         UtilScript.pt(32)
+                size:         UtilScript.dp(32)
                 emitRate:     snowPage.bigSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: UtilScript.pt(10)
+                    magnitudeVariation: UtilScript.dp(10)
                 }
             }
 
@@ -609,14 +609,14 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem2
                 lifeSpan:     1000
-                size:         UtilScript.pt(32)
+                size:         UtilScript.dp(32)
                 emitRate:     snowPage.bigSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: UtilScript.pt(10)
+                    magnitudeVariation: UtilScript.dp(10)
                 }
             }
 
@@ -636,14 +636,14 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem3
                 lifeSpan:     1000
-                size:         UtilScript.pt(32)
+                size:         UtilScript.dp(32)
                 emitRate:     snowPage.bigSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: UtilScript.pt(10)
+                    magnitudeVariation: UtilScript.dp(10)
                 }
             }
 
@@ -663,14 +663,14 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem4
                 lifeSpan:     1000
-                size:         UtilScript.pt(32)
+                size:         UtilScript.dp(32)
                 emitRate:     snowPage.bigSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: UtilScript.pt(10)
+                    magnitudeVariation: UtilScript.dp(10)
                 }
             }
 
@@ -690,14 +690,14 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem5
                 lifeSpan:     1000
-                size:         UtilScript.pt(16)
+                size:         UtilScript.dp(16)
                 emitRate:     snowPage.smallSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: UtilScript.pt(10)
+                    magnitudeVariation: UtilScript.dp(10)
                 }
             }
 
@@ -717,14 +717,14 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem6
                 lifeSpan:     1000
-                size:         UtilScript.pt(16)
+                size:         UtilScript.dp(16)
                 emitRate:     snowPage.smallSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: UtilScript.pt(10)
+                    magnitudeVariation: UtilScript.dp(10)
                 }
             }
 
@@ -744,14 +744,14 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem7
                 lifeSpan:     1000
-                size:         UtilScript.pt(16)
+                size:         UtilScript.dp(16)
                 emitRate:     snowPage.smallSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: UtilScript.pt(10)
+                    magnitudeVariation: UtilScript.dp(10)
                 }
             }
 
@@ -771,14 +771,14 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem8
                 lifeSpan:     1000
-                size:         UtilScript.pt(16)
+                size:         UtilScript.dp(16)
                 emitRate:     snowPage.smallSnowflakesCount
 
                 velocity: AngleDirection {
                     angle:              snowPage.snowflakesAngle
                     angleVariation:     30
                     magnitude:          snowPage.snowflakesVelocity
-                    magnitudeVariation: UtilScript.pt(10)
+                    magnitudeVariation: UtilScript.dp(10)
                 }
             }
 
@@ -830,11 +830,11 @@ Item {
             id:                  adSettingsButtonImage
             anchors.top:         parent.top
             anchors.right:       parent.right
-            anchors.topMargin:   Math.max(snowPage.bannerViewHeight + UtilScript.pt(8), UtilScript.pt(34))
-            anchors.rightMargin: UtilScript.pt(8)
+            anchors.topMargin:   Math.max(snowPage.bannerViewHeight + UtilScript.dp(8), UtilScript.dp(34))
+            anchors.rightMargin: UtilScript.dp(8)
             z:                   1
-            width:               UtilScript.pt(32)
-            height:              UtilScript.pt(32)
+            width:               UtilScript.dp(32)
+            height:              UtilScript.dp(32)
             source:              "qrc:/resources/images/snow/button_ad_settings.png"
             fillMode:            Image.PreserveAspectFit
 
@@ -852,14 +852,14 @@ Item {
             id:                       buttonImageRow
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin:     UtilScript.pt(30)
+            anchors.bottomMargin:     UtilScript.dp(30)
             z:                        1
-            spacing:                  UtilScript.pt(16)
+            spacing:                  UtilScript.dp(16)
 
             Image {
                 id:       settingsButtonImage
-                width:    UtilScript.pt(64)
-                height:   UtilScript.pt(64)
+                width:    UtilScript.dp(64)
+                height:   UtilScript.dp(64)
                 source:   "qrc:/resources/images/snow/button_settings.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -881,8 +881,8 @@ Item {
 
             Image {
                 id:       captureImageButtonImage
-                width:    UtilScript.pt(64)
-                height:   UtilScript.pt(64)
+                width:    UtilScript.dp(64)
+                height:   UtilScript.dp(64)
                 source:   "qrc:/resources/images/snow/button_capture_image.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -898,8 +898,8 @@ Item {
 
             Image {
                 id:       captureGIFButtonImage
-                width:    UtilScript.pt(64)
-                height:   UtilScript.pt(64)
+                width:    UtilScript.dp(64)
+                height:   UtilScript.dp(64)
                 source:   "qrc:/resources/images/snow/button_capture_gif.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -915,8 +915,8 @@ Item {
 
             Image {
                 id:       helpButtonImage
-                width:    UtilScript.pt(64)
-                height:   UtilScript.pt(64)
+                width:    UtilScript.dp(64)
+                height:   UtilScript.dp(64)
                 source:   "qrc:/resources/images/snow/button_help.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -936,7 +936,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
             z:                      2
-            width:                  UtilScript.pt(96)
+            width:                  UtilScript.dp(96)
             height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
             color:                  "black"
             clip:                   true
