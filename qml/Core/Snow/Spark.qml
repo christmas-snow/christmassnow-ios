@@ -4,8 +4,8 @@ import "../../Util.js" as UtilScript
 
 Image {
     id:       spark
-    width:    UtilScript.pt(sourceSize.width)
-    height:   UtilScript.pt(sourceSize.height)
+    width:    UtilScript.dp(sourceSize.width)
+    height:   UtilScript.dp(sourceSize.height)
     source:   "qrc:/resources/images/snow/sparks/spark_%1.png".arg(sparkType)
     fillMode: Image.PreserveAspectFit
 
