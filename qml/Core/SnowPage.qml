@@ -297,18 +297,18 @@ Item {
     }
 
     function captureImage() {
-        waitRectangle.visible = true;
+        waitArea.visible = true;
 
         if (!backgroundImage.grabToImage(function (result) {
             result.saveToFile(ShareHelper.imageFilePath);
 
             ShareHelper.showShareToView(ShareHelper.imageFilePath);
 
-            waitRectangle.visible = false;
+            waitArea.visible = false;
         })) {
             console.log("grabToImage() failed");
 
-            waitRectangle.visible = false;
+            waitArea.visible = false;
         }
     }
 
@@ -983,23 +983,26 @@ Item {
             }
         }
 
-        Rectangle {
-             id:           waitRectangle
-             anchors.fill: parent
-             z:            3
-             color:        "black"
-             opacity:      0.75
-             visible:      false
+        MultiPointTouchArea {
+            id:           waitArea
+            anchors.fill: parent
+            z:            3
+            visible:      false
 
-             BusyIndicator {
-                 anchors.centerIn: parent
-                 running:          parent.visible
-             }
+            Rectangle {
+                anchors.fill: parent
+                color:        "black"
+                opacity:      0.75
+            }
 
-             MultiPointTouchArea {
-                 anchors.fill: parent
-             }
-         }
+            BusyIndicator {
+                anchors.centerIn: parent
+                z:                1
+                implicitWidth:    UtilScript.dp(64)
+                implicitHeight:   UtilScript.dp(64)
+                running:          parent.visible
+            }
+        }
     }
 
     PurchaseDialog {
@@ -1058,7 +1061,7 @@ Item {
 
         onRunningChanged: {
             if (running) {
-                waitRectangle.visible = true;
+                waitArea.visible = true;
 
                 frameNumber = 0;
             } else {
@@ -1070,7 +1073,7 @@ Item {
                     }
                 }
 
-                waitRectangle.visible = false;
+                waitArea.visible = false;
             }
         }
 
