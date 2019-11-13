@@ -574,7 +574,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem1
-                running: snowPage.appInForeground && snowPage.pageActive
+                running: snowPage.pageActive
             }
 
             Emitter {
@@ -601,7 +601,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem2
-                running: snowPage.appInForeground && snowPage.pageActive
+                running: snowPage.pageActive
             }
 
             Emitter {
@@ -628,7 +628,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem3
-                running: snowPage.appInForeground && snowPage.pageActive
+                running: snowPage.pageActive
             }
 
             Emitter {
@@ -655,7 +655,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem4
-                running: snowPage.appInForeground && snowPage.pageActive
+                running: snowPage.pageActive
             }
 
             Emitter {
@@ -682,7 +682,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem5
-                running: snowPage.appInForeground && snowPage.pageActive
+                running: snowPage.pageActive
             }
 
             Emitter {
@@ -709,7 +709,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem6
-                running: snowPage.appInForeground && snowPage.pageActive
+                running: snowPage.pageActive
             }
 
             Emitter {
@@ -736,7 +736,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem7
-                running: snowPage.appInForeground && snowPage.pageActive
+                running: snowPage.pageActive
             }
 
             Emitter {
@@ -763,7 +763,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem8
-                running: snowPage.appInForeground && snowPage.pageActive
+                running: snowPage.pageActive
             }
 
             Emitter {
