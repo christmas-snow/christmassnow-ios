@@ -299,9 +299,11 @@ Item {
         waitArea.visible = true;
 
         if (!backgroundImage.grabToImage(function (result) {
-            result.saveToFile(ShareHelper.imageFilePath);
-
-            ShareHelper.showShareToView(ShareHelper.imageFilePath);
+            if (result.saveToFile(ShareHelper.imageFilePath)) {
+                ShareHelper.showShareToView(ShareHelper.imageFilePath);
+            } else {
+                console.log("saveToFile() failed");
+            }
 
             waitArea.visible = false;
         })) {
@@ -1018,14 +1020,16 @@ Item {
         readonly property int framesCount: 5
 
         property int frameNumber:          0
+        property int capturedFramesCount:  0
 
         onRunningChanged: {
             if (running) {
                 waitArea.visible = true;
 
-                frameNumber = 0;
+                frameNumber         = 0;
+                capturedFramesCount = 0;
             } else {
-                if (frameNumber >= framesCount) {
+                if (capturedFramesCount >= framesCount) {
                     if (GIFCreator.createGIF(framesCount, interval / 10)) {
                         ShareHelper.showShareToView(GIFCreator.gifFilePath);
                     } else {
@@ -1042,14 +1046,24 @@ Item {
                 var frame_number = frameNumber;
 
                 if (!backgroundImage.grabToImage(function (result) {
-                    result.saveToFile(GIFCreator.imageFilePathMask.arg(frame_number));
+                    if (result.saveToFile(GIFCreator.imageFilePathMask.arg(frame_number))) {
+                        capturedFramesCount = capturedFramesCount + 1;
+
+                        if (capturedFramesCount >= framesCount) {
+                            stop();
+                        }
+                    } else {
+                        console.log("saveToFile() failed for frame %1".arg(frame_number));
+
+                        stop();
+                    }
                 })) {
                     console.log("grabToImage() failed for frame %1".arg(frame_number));
+
+                    stop();
                 }
 
                 frameNumber = frameNumber + 1;
-            } else {
-                stop();
             }
         }
     }
