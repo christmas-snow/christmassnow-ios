@@ -302,12 +302,12 @@ Item {
             if (result.saveToFile(ShareHelper.imageFilePath)) {
                 ShareHelper.showShareToView(ShareHelper.imageFilePath);
             } else {
-                console.log("saveToFile() failed");
+                console.error("saveToFile() failed");
             }
 
             waitArea.visible = false;
         })) {
-            console.log("grabToImage() failed");
+            console.error("grabToImage() failed");
 
             waitArea.visible = false;
         }
@@ -321,7 +321,7 @@ Item {
         loops:    Audio.Infinite
 
         onError: {
-            console.log(errorString);
+            console.error(errorString);
         }
     }
 
@@ -332,7 +332,7 @@ Item {
         imageFilePath:  ":/resources/images/snow/bg-%1-4.png".arg(snowPage.currentBackgroundNum)
 
         onError: {
-            console.log(errorString);
+            console.error(errorString);
         }
 
         onRandomSparksCreated: {
@@ -361,7 +361,7 @@ Item {
 
                     snowPage.sparksList.push(spark);
                 } else {
-                    console.log(component.errorString());
+                    console.error(component.errorString());
                 }
             }
         }
@@ -1033,7 +1033,7 @@ Item {
                     if (GIFCreator.createGIF(framesCount, interval / 10)) {
                         ShareHelper.showShareToView(GIFCreator.gifFilePath);
                     } else {
-                        console.log("createGIF() failed");
+                        console.error("createGIF() failed");
                     }
                 }
 
@@ -1053,12 +1053,12 @@ Item {
                             stop();
                         }
                     } else {
-                        console.log("saveToFile() failed for frame %1".arg(frame_number));
+                        console.error("saveToFile() failed for frame %1".arg(frame_number));
 
                         stop();
                     }
                 })) {
-                    console.log("grabToImage() failed for frame %1".arg(frame_number));
+                    console.error("grabToImage() failed for frame %1".arg(frame_number));
 
                     stop();
                 }
