@@ -1,7 +1,6 @@
-#include <QtCore/QtGlobal>
-#include <QtCore/QtMath>
 #include <QtCore/QDateTime>
 #include <QtCore/QVariantMap>
+#include <QtCore/QRandomGenerator>
 #include <QtGui/QColor>
 #include <QtGui/QImage>
 
@@ -11,9 +10,6 @@ SparkCreator::SparkCreator(QObject *parent) : QObject(parent)
 {
     MinSparksCount = 0;
     MaxSparksCount = 0;
-    ImageFilePath  = QStringLiteral("");
-
-    qsrand(static_cast<uint>(QDateTime::currentMSecsSinceEpoch()));
 }
 
 int SparkCreator::minSparksCount() const
@@ -45,12 +41,12 @@ void SparkCreator::setImageFilePath(const QString &file_path)
 {
     ImageFilePath = file_path;
 
+    SnowPixels.clear();
+
     if (!ImageFilePath.isEmpty()) {
         QImage image(ImageFilePath);
 
         if (!image.isNull()) {
-            SnowPixels.clear();
-
             for (int x = 0; x < image.width(); x++) {
                 for (int y = 0; y < image.height(); y++) {
                     QColor color = image.pixelColor(x, y);
@@ -73,11 +69,17 @@ void SparkCreator::setImageFilePath(const QString &file_path)
 
 void SparkCreator::createRandomSparks()
 {
-    QVariantList sparks;
+    if (MinSparksCount >= 0 && MaxSparksCount > 0 && MinSparksCount < MaxSparksCount && SnowPixels.count() > 0) {
+        QVariantList sparks;
 
-    for (int i = 0; i < MinSparksCount + qrand() * (static_cast<qreal>(MaxSparksCount - MinSparksCount) / RAND_MAX); i++) {
-        sparks.append(SnowPixels.at(qFloor(qrand() * (static_cast<qreal>(SnowPixels.count() - 1) / RAND_MAX))));
+        int sparks_count = QRandomGenerator::system()->bounded(MinSparksCount, MaxSparksCount);
+
+        for (int i = 0; i < sparks_count; i++) {
+            sparks.append(SnowPixels.at(QRandomGenerator::system()->bounded(SnowPixels.count())));
+        }
+
+        emit randomSparksCreated(sparks);
+    } else {
+        emit error(QStringLiteral("Cannot create random sparks"));
     }
-
-    emit randomSparksCreated(sparks);
 }
