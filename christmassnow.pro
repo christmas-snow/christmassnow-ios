@@ -6,20 +6,21 @@ CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
-SOURCES += src/main.cpp \
-    src/sparkcreator.cpp \
-    src/gifcreator.cpp
+SOURCES += \
+    src/gifcreator.cpp \
+    src/main.cpp \
+    src/sparkcreator.cpp
 
 OBJECTIVE_SOURCES += \
     src/sharehelper.mm \
     src/storehelper.mm
 
 HEADERS += \
-    src/sharehelper.h \
-    src/storehelper.h \
     src/gif.h \
     src/gifcreator.h \
-    src/sparkcreator.h
+    src/sharehelper.h \
+    src/sparkcreator.h \
+    src/storehelper.h
 
 RESOURCES += \
     qml.qrc \
@@ -27,12 +28,12 @@ RESOURCES += \
     translations.qrc
 
 TRANSLATIONS += \
-    translations/christmassnow_ru.ts \
     translations/christmassnow_de.ts \
-    translations/christmassnow_fr.ts \
-    translations/christmassnow_zh.ts \
     translations/christmassnow_es.ts \
-    translations/christmassnow_it.ts
+    translations/christmassnow_fr.ts \
+    translations/christmassnow_it.ts \
+    translations/christmassnow_ru.ts \
+    translations/christmassnow_zh.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
