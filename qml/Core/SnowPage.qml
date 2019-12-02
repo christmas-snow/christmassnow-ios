@@ -26,7 +26,7 @@ Item {
     readonly property real defaultSnowflakesAngle: 90.0
     readonly property real minSnowflakesVelocity:  UtilScript.dp(30.0)
     readonly property real maxSnowflakesVelocity:  UtilScript.dp(360.0)
-    readonly property real accelShakeThreshold:    50.0
+    readonly property real accelShakeThreshold:    20.0
 
     property int currentBackgroundNum:             1
     property int bigSnowflakesCount:               10
@@ -1030,24 +1030,15 @@ Item {
         dataRate: 10
         active:   snowPage.appInForeground && snowPage.pageActive
 
-        property real lastReadingX: 0.0
-        property real lastReadingY: 0.0
-        property real lastReadingZ: 0.0
-
         onReadingChanged: {
-            if ((lastReadingX !== 0.0 || lastReadingY !== 0.0 || lastReadingZ !== 0.0) &&
-                (Math.abs(reading.x - lastReadingX) > snowPage.accelShakeThreshold ||
-                 Math.abs(reading.y - lastReadingY) > snowPage.accelShakeThreshold ||
-                 Math.abs(reading.z - lastReadingZ) > snowPage.accelShakeThreshold)) {
+            if (Math.sqrt(Math.pow(reading.x, 2) +
+                          Math.pow(reading.y, 2) +
+                          Math.pow(reading.z, 2)) > snowPage.accelShakeThreshold) {
                 snowPage.bigSnowflakesCount   = snowPage.maxBigSnowflakesCount;
                 snowPage.smallSnowflakesCount = snowPage.maxSmallSnowflakesCount;
 
                 snowPage.resetParticleSystems();
             }
-
-            lastReadingX = reading.x;
-            lastReadingY = reading.y;
-            lastReadingZ = reading.z;
         }
     }
 
