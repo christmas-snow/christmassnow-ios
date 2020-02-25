@@ -6,7 +6,7 @@
 
 #ifdef __OBJC__
 @class BannerViewDelegate;
-#endif
+#endif // __OBJC__
 
 class AdMobHelper : public QObject
 {
@@ -51,7 +51,7 @@ private:
     BannerViewDelegate *BannerViewDelegateInstance;
 #else
     void               *BannerViewDelegateInstance;
-#endif
+#endif // __OBJC__
 };
 
 #endif // ADMOBHELPER_H
