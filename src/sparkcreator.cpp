@@ -6,10 +6,11 @@
 
 #include "sparkcreator.h"
 
-SparkCreator::SparkCreator(QObject *parent) : QObject(parent)
+SparkCreator::SparkCreator(QObject *parent) :
+    QObject       (parent),
+    MinSparksCount(0),
+    MaxSparksCount(0)
 {
-    MinSparksCount = 0;
-    MaxSparksCount = 0;
 }
 
 int SparkCreator::minSparksCount() const
