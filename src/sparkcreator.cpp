@@ -76,7 +76,7 @@ void SparkCreator::createRandomSparks()
         int sparks_count = QRandomGenerator::system()->bounded(MinSparksCount, MaxSparksCount);
 
         for (int i = 0; i < sparks_count; i++) {
-            sparks.append(SnowPixels.at(QRandomGenerator::system()->bounded(SnowPixels.count())));
+            sparks.append(SnowPixels[QRandomGenerator::system()->bounded(SnowPixels.count())]);
         }
 
         emit randomSparksCreated(sparks);
