@@ -3,12 +3,13 @@
 
 #include <QtCore/QtGlobal>
 #include <QtCore/QtMath>
+#include <QtCore/QLatin1String>
 #include <QtCore/QDebug>
 
 #include "admobhelper.h"
 
 const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID(QStringLiteral("ca-app-pub-2455088855015693/9661812425"));
-const QString AdMobHelper::ADMOB_TEST_DEVICE_ID    (QStringLiteral(""));
+const QString AdMobHelper::ADMOB_TEST_DEVICE_ID    (QLatin1String(""));
 
 namespace {
 
@@ -103,7 +104,7 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 {
     GADRequest *request = [GADRequest request];
 
-    if (AdMobHelper::ADMOB_TEST_DEVICE_ID != QStringLiteral("")) {
+    if (AdMobHelper::ADMOB_TEST_DEVICE_ID != QLatin1String("")) {
         request.testDevices = @[AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString()];
     }
 
