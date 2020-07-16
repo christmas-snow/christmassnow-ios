@@ -66,6 +66,9 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 
 - (void)dealloc
 {
+    BannerView.rootViewController = nil;
+    BannerView.delegate           = nil;
+
     [BannerView removeFromSuperview];
     [BannerView release];
 
