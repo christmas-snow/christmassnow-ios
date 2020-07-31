@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATH=$PATH:~/Qt/5.13.0/ios/bin
+PATH="$PATH:~/Qt/5.13.0/ios/bin"
 
 lupdate -locations absolute ../christmassnow.pro -ts ../translations/christmassnow_de.src.ts
 lupdate -locations absolute ../qml               -ts ../translations/christmassnow_de.qml.ts
