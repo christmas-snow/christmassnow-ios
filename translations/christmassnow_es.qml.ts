@@ -17,7 +17,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="11"/>
+        <location filename="../qml/main.qml" line="10"/>
         <source>Snow Scenes</source>
         <translation>Nieve</translation>
     </message>
