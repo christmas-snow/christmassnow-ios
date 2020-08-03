@@ -1,0 +1,79 @@
+language: cpp
+
+os: osx
+
+osx_image: xcode12u
+
+addons:
+  sonarcloud:
+    organization: "christmas-snow-github"
+    token:
+      secure: "kRWSBl6J2yJ2llQT8jvjoyRiPe55IVhhzslIJnDRXvVawaiT/qrr5IgUNo+oc7n9IG2LUvh7Qa+x8DEFoT3wQ/Xnzhwe3C3h+IMuvOKDJmMeKma37aEJq7+grf6OIXsWIoaq6GDQbgB7xAaAFxvCHg+zuIzGNI0CtYnUm7/iYRpsIBX8W7mT1YR57VaECYBVfbOrU2gLmsQk6rXoMjJ0qHKYyNgLmJWzwBfcc8vl+FU9cGsElwCBS40N8zTQS6TAvCl1jQMkhnSAUMp6r/+y1EeMkdOiF8x03BQ4PfEH5qjxPAZeQk647NiOZ2vJkUyXNIbuWKUUN4b9zbz7C8z1RovFzOx92P/rflAXpCF4RkIuqDhHlD1VjsuttK2pa/x4ZAH9eAxZf6g7xikgn32Bc7Mv+nm3yPy0N2woX5pwHKUYInK16kkMXWEac+wwWssYWnLudWqpCIAF/zBKY0TdeZTFZKyHANqb49iEI3JnA6p6SntEDudtu4d0bJxdzxhdt7NPCZ/hE+/sI6Q2DqNDnZjOH7lJis9FooNnMtB5m3SVvVB2wnZZNuTnetkr0QrVQxIQSf2W0feHXfcYdAi3ACaj9FTJclRzmKh3sh32dNaU3fwZyGbVgsTptfWkQrNssCe3H3qJD2z2O214cndTwSTj80IIsSTc1wqsy0mqpFY="
+
+install:
+  - |
+    echo && \
+    echo "---- INSTALLATION OF HOMEBREW PACKAGES ----" && \
+    echo && \
+    brew install p7zip && \
+    echo && \
+    echo "------- INSTALLATION OF QT PACKAGES -------" && \
+    echo && \
+    bash tools/install-qt.sh --version 5.12.9 --target ios --toolchain ios --directory "$HOME/Qt" qtbase qtdeclarative qtquickcontrols2 qtmultimedia qtsensors qtpurchasing && \
+    echo && \
+    echo "----------- END OF INSTALLATION -----------" && \
+    echo
+
+script:
+  - |
+    echo && \
+    echo "---------- ENVIRONMENT VARIABLES ----------" && \
+    echo && \
+    export PATH="$HOME/Qt/5.12.9/ios/bin:$PATH" && \
+    export QMAKE_CFLAGS_ENV="-Werror" && \
+    export QMAKE_CXXFLAGS_ENV="-Werror" && \
+    export QMAKE_OBJECTIVE_CFLAGS_ENV="-Werror -Wno-error-objc-property-no-attribute" && \
+    echo && \
+    echo "--------- UNSHALLOW GIT FOR SONAR ---------" && \
+    echo && \
+    git fetch --unshallow && \
+    echo && \
+    echo "---------- CREATE BUILD DIRECTORY ---------" && \
+    echo && \
+    mkdir .build && \
+    cd .build && \
+    echo && \
+    echo "------------------ QMAKE ------------------" && \
+    echo && \
+    qmake ../christmassnow.pro && \
+    echo && \
+    echo "------------------ MAKE -------------------" && \
+    echo && \
+    make XCODEBUILD_FLAGS="CODE_SIGN_IDENTITY=\"\" CODE_SIGNING_REQUIRED=NO" debug-device && \
+    if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then \
+        echo && \
+        echo "------------- MAKE DISTCLEAN --------------" && \
+        echo && \
+        make distclean && \
+        echo && \
+        echo "------------------ QMAKE ------------------" && \
+        echo && \
+        qmake ../christmassnow.pro && \
+        echo && \
+        echo "-------------- SONAR WRAPPER --------------" && \
+        echo && \
+        build-wrapper-macosx-x86 --out-dir bw-output make XCODEBUILD_FLAGS="CODE_SIGN_IDENTITY=\"\" CODE_SIGNING_REQUIRED=NO" debug-device && \
+        echo && \
+        echo "-------------- SONAR SCANNER --------------" && \
+        echo && \
+        cd .. && \
+        sonar-scanner -Dsonar.projectKey=christmas-snow_christmassnow-ios \
+                      -Dsonar.projectName="ChristmasSnow iOS" \
+                      -Dsonar.sources=. \
+                      -Dsonar.sourceEncoding=UTF-8 \
+                      -Dsonar.exclusions="qml_*.cpp,qrc_*.cpp,3rdparty/**/*,ios/frameworks/**/*,qml/**/*,translations/*" \
+                      -Dsonar.cfamily.build-wrapper-output=.build/bw-output \
+                      -Dsonar.cfamily.cache.enabled=false \
+                      -Dsonar.cfamily.threads=1 \
+                      -Dsonar.cpp.file.suffixes=.cpp,.mm; \
+    fi
