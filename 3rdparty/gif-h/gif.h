@@ -29,6 +29,8 @@
 #ifndef gif_h
 #define gif_h
 
+#ifndef __clang_analyzer__
+
 #include <stdio.h>   // for FILE*
 #include <string.h>  // for memcpy and bzero
 #include <stdint.h>  // for integer typedefs
@@ -831,5 +833,7 @@ bool GifEnd( GifWriter* writer )
 
     return true;
 }
+
+#endif // __clang_analyzer__
 
 #endif
