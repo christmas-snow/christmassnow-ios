@@ -29,8 +29,6 @@
 #ifndef gif_h
 #define gif_h
 
-#ifndef __clang_analyzer__
-
 #include <stdio.h>   // for FILE*
 #include <string.h>  // for memcpy and bzero
 #include <stdint.h>  // for integer typedefs
@@ -110,6 +108,7 @@ void GifGetClosestPaletteColor(GifPalette* pPal, int r, int g, int b, int& bestI
         return;
     }
 
+#ifndef __clang_analyzer__
     // take the appropriate color (r, g, or b) for this node of the k-d tree
     int comps[3]; comps[0] = r; comps[1] = g; comps[2] = b;
     int splitComp = comps[pPal->treeSplitElt[treeRoot]];
@@ -133,6 +132,7 @@ void GifGetClosestPaletteColor(GifPalette* pPal, int r, int g, int b, int& bestI
             GifGetClosestPaletteColor(pPal, r, g, b, bestInd, bestDiff, treeRoot*2);
         }
     }
+#endif
 }
 
 void GifSwapPixels(uint8_t* image, int pixA, int pixB)
@@ -328,6 +328,7 @@ void GifSplitPalette(uint8_t* image, int numPixels, int firstElt, int lastElt, i
 int GifPickChangedPixels( const uint8_t* lastFrame, uint8_t* frame, int numPixels )
 {
     int numChanged = 0;
+#ifndef __clang_analyzer__
     uint8_t* writeIter = frame;
 
     for (int ii=0; ii<numPixels; ++ii)
@@ -345,6 +346,7 @@ int GifPickChangedPixels( const uint8_t* lastFrame, uint8_t* frame, int numPixel
         lastFrame += 4;
         frame += 4;
     }
+#endif
 
     return numChanged;
 }
@@ -595,6 +597,7 @@ void GifWritePalette( const GifPalette* pPal, FILE* f )
     fputc(0, f);
     fputc(0, f);
 
+#ifndef __clang_analyzer__
     for(int ii=1; ii<(1 << pPal->bitDepth); ++ii)
     {
         uint32_t r = pPal->r[ii];
@@ -605,6 +608,7 @@ void GifWritePalette( const GifPalette* pPal, FILE* f )
         fputc((int)g, f);
         fputc((int)b, f);
     }
+#endif
 }
 
 // write the image header, LZW-compress and write out the image
@@ -833,7 +837,5 @@ bool GifEnd( GifWriter* writer )
 
     return true;
 }
-
-#endif // __clang_analyzer__
 
 #endif
