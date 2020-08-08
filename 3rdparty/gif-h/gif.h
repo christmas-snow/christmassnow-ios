@@ -654,7 +654,9 @@ void GifWriteLzwImage(FILE* f, uint8_t* image, uint32_t left, uint32_t top,  uin
     memset(codetree, 0, sizeof(GifLzwNode)*4096);
     int32_t curCode = -1;
     uint32_t codeSize = (uint32_t)minCodeSize + 1;
+#ifndef __clang_analyzer__
     uint32_t maxCode = clearCode+1;
+#endif
 
     GifBitStatus stat;
     stat.byte = 0;
