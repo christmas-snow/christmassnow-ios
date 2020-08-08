@@ -497,6 +497,7 @@ void GifThresholdImage( const uint8_t* lastFrame, const uint8_t* nextFrame, uint
     uint32_t numPixels = width*height;
     for( uint32_t ii=0; ii<numPixels; ++ii )
     {
+#ifndef __clang_analyzer__
         // if a previous color is available, and it matches the current color,
         // set the pixel to transparent
         if(lastFrame &&
@@ -522,6 +523,7 @@ void GifThresholdImage( const uint8_t* lastFrame, const uint8_t* nextFrame, uint
             outFrame[2] = pPal->b[bestInd];
             outFrame[3] = (uint8_t)bestInd;
         }
+#endif
 
         if(lastFrame) lastFrame += 4;
         outFrame += 4;
@@ -661,6 +663,7 @@ void GifWriteLzwImage(FILE* f, uint8_t* image, uint32_t left, uint32_t top,  uin
 
     GifWriteCode(f, stat, clearCode, codeSize);  // start with a fresh LZW dictionary
 
+#ifndef __clang_analyzer__
     for(uint32_t yy=0; yy<height; ++yy)
     {
         for(uint32_t xx=0; xx<width; ++xx)
@@ -715,6 +718,7 @@ void GifWriteLzwImage(FILE* f, uint8_t* image, uint32_t left, uint32_t top,  uin
             }
         }
     }
+#endif // __clang_analyzer__
 
     // compression footer
     GifWriteCode(f, stat, (uint32_t)curCode, codeSize);
