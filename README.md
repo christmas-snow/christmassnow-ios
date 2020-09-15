@@ -11,7 +11,7 @@ get additional information.
 
 ---
 
-[![Travis Build Status](https://travis-ci.org/christmas-snow/christmassnow-ios.svg?branch=master)](https://travis-ci.org/christmas-snow/christmassnow-ios)
+[![Travis Build Status](https://travis-ci.com/christmas-snow/christmassnow-ios.svg?branch=master)](https://travis-ci.com/christmas-snow/christmassnow-ios)
 [![SonarCloud Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=christmas-snow_christmassnow-ios&metric=alert_status)](https://sonarcloud.io/dashboard?id=christmas-snow_christmassnow-ios)
 
 [![SonarCloud Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=christmas-snow_christmassnow-ios&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=christmas-snow_christmassnow-ios)
