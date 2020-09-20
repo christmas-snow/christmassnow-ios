@@ -251,7 +251,7 @@ Item {
         if (state === "snowLevel4") {
             sparkCreator.createRandomSparks();
         } else {
-            if (sparksList !== null) {
+            if (sparksList) {
                 for (var i = 0; i < sparksList.length; i++) {
                     sparksList[i].destroy();
                 }
@@ -337,7 +337,7 @@ Item {
         }
 
         onRandomSparksCreated: {
-            if (snowPage.sparksList !== null) {
+            if (snowPage.sparksList) {
                 for (var i = 0; i < snowPage.sparksList.length; i++) {
                     snowPage.sparksList[i].destroy();
                 }
