@@ -70,7 +70,7 @@ void SparkCreator::setImageFilePath(const QString &file_path)
 
 void SparkCreator::createRandomSparks()
 {
-    if (MinSparksCount >= 0 && MaxSparksCount > 0 && MinSparksCount < MaxSparksCount && SnowPixels.count() > 0) {
+    if (MinSparksCount >= 0 && MaxSparksCount > 0 && MinSparksCount < MaxSparksCount && !SnowPixels.isEmpty()) {
         QVariantList sparks;
 
         int sparks_count = QRandomGenerator::system()->bounded(MinSparksCount, MaxSparksCount);
