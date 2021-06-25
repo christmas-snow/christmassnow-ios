@@ -60,8 +60,10 @@ ios {
             -framework GoogleAppMeasurement \
             -framework GoogleMobileAds \
             -framework GoogleUtilities \
+            -framework UserMessagingPlatform \
             -framework PromisesObjC \
             -framework nanopb \
+            -framework JavaScriptCore \
             -framework UIKit \
             -framework StoreKit
 

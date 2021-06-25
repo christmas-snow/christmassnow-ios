@@ -9,8 +9,9 @@
 
 #include "admobhelper.h"
 
-const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID(QStringLiteral("ca-app-pub-2455088855015693/9661812425"));
-const QString AdMobHelper::ADMOB_TEST_DEVICE_ID    (QLatin1String(""));
+const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID  (QStringLiteral("ca-app-pub-2455088855015693/9661812425"));
+const QString AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID(QStringLiteral("ca-app-pub-3940256099942544/4411468910"));
+const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      (QLatin1String(""));
 
 namespace {
 
@@ -24,14 +25,12 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 - (instancetype)initWithHelper:(AdMobHelper *)helper NS_DESIGNATED_INITIALIZER;
 - (void)dealloc;
 - (void)cleanupAndAutorelease;
-- (void)setPersonalization:(BOOL)personalized;
 - (void)loadAd;
 
 @end
 
 @implementation BannerViewDelegate
 {
-    BOOL           ShowPersonalizedAds;
     GADBannerView *BannerView;
     AdMobHelper   *AdMobHelperInstance;
 }
@@ -41,7 +40,6 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     self = [super init];
 
     if (self != nil) {
-        ShowPersonalizedAds = NO;
         AdMobHelperInstance = helper;
 
         UIViewController * __block root_view_controller = nil;
@@ -52,7 +50,8 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
             *stop = (root_view_controller != nil);
         }];
 
-        BannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+        BannerView = [[GADBannerView alloc] initWithAdSize:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ?
+                                                            kGADAdSizeLeaderboard : kGADAdSizeBanner)];
 
         BannerView.adUnitID                                  = AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID.toNSString();
         BannerView.autoloadEnabled                           = YES;
@@ -84,29 +83,14 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     [self autorelease];
 }
 
-- (void)setPersonalization:(BOOL)personalized
-{
-    ShowPersonalizedAds = personalized;
-}
-
 - (void)loadAd
 {
-    GADRequest *request = [GADRequest request];
-
-    if (!ShowPersonalizedAds) {
-        GADExtras *extras = [[[GADExtras alloc] init] autorelease];
-
-        extras.additionalParameters = @{@"npa": @"1"};
-
-        [request registerAdNetworkExtras:extras];
-    }
-
-    [BannerView loadRequest:request];
+    [BannerView loadRequest:[GADRequest request]];
 }
 
-- (void)adViewDidReceiveAd:(GADBannerView *)adView
+- (void)bannerViewDidReceiveAd:(nonnull GADBannerView *)bannerView
 {
-    Q_UNUSED(adView)
+    Q_UNUSED(bannerView)
 
     UIViewController * __block root_view_controller = nil;
 
@@ -134,24 +118,9 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     }
 }
 
-- (void)adViewWillPresentScreen:(GADBannerView *)adView
+- (void)bannerView:(nonnull GADBannerView *)bannerView didFailToReceiveAdWithError:(nonnull NSError *)error
 {
-    Q_UNUSED(adView)
-}
-
-- (void)adViewWillDismissScreen:(GADBannerView *)adView
-{
-    Q_UNUSED(adView)
-}
-
-- (void)adViewWillLeaveApplication:(GADBannerView *)adView
-{
-    Q_UNUSED(adView)
-}
-
-- (void)adView:(GADBannerView *)adView didFailToReceiveAdWithError:(GADRequestError *)error
-{
-    Q_UNUSED(adView)
+    Q_UNUSED(bannerView)
 
     qWarning() << QString::fromNSString(error.localizedDescription);
 
@@ -160,18 +129,144 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 
 @end
 
+@interface InterstitialDelegate : NSObject<GADFullScreenContentDelegate>
+
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithHelper:(AdMobHelper *)helper NS_DESIGNATED_INITIALIZER;
+- (void)dealloc;
+- (void)cleanupAndAutorelease;
+- (void)loadAd;
+- (void)show;
+- (BOOL)isReady;
+
+@end
+
+@implementation InterstitialDelegate
+{
+    GADInterstitialAd *Interstitial;
+    AdMobHelper       *AdMobHelperInstance;
+}
+
+- (instancetype)initWithHelper:(AdMobHelper *)helper
+{
+    self = [super init];
+
+    if (self != nil) {
+        AdMobHelperInstance = helper;
+
+        [self performSelector:@selector(loadAd) withObject:nil afterDelay:0.0];
+    }
+
+    return self;
+}
+
+- (void)dealloc
+{
+    Interstitial.fullScreenContentDelegate = nil;
+
+    [Interstitial release];
+
+    [super dealloc];
+}
+
+- (void)cleanupAndAutorelease
+{
+    AdMobHelperInstance = nullptr;
+
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+
+    [self autorelease];
+}
+
+- (void)loadAd
+{
+    Interstitial.fullScreenContentDelegate = nil;
+
+    [Interstitial release];
+
+    Interstitial = nil;
+
+    [GADInterstitialAd loadWithAdUnitID:AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID.toNSString() request:[GADRequest request]
+                       completionHandler:^(GADInterstitialAd *ad, NSError *error) {
+        if (error != nil) {
+            qWarning() << QString::fromNSString(error.localizedDescription);
+
+            [self performSelector:@selector(loadAd) withObject:nil afterDelay:AD_RELOAD_ON_FAILURE_DELAY];
+        } else {
+            Interstitial = [ad retain];
+
+            Interstitial.fullScreenContentDelegate = self;
+        }
+    }];
+}
+
+- (void)show
+{
+    if (Interstitial != nil) {
+        UIViewController * __block root_view_controller = nil;
+
+        [UIApplication.sharedApplication.windows enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
+            root_view_controller = window.rootViewController;
+
+            *stop = (root_view_controller != nil);
+        }];
+
+        [Interstitial presentFromRootViewController:root_view_controller];
+    }
+}
+
+- (BOOL)isReady
+{
+    if (Interstitial != nil) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)adDidPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad
+{
+    Q_UNUSED(ad)
+
+    if (AdMobHelperInstance != nullptr) {
+        AdMobHelperInstance->SetInterstitialActive(true);
+    }
+}
+
+- (void)adDidDismissFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad
+{
+    Q_UNUSED(ad)
+
+    if (AdMobHelperInstance != nullptr) {
+        AdMobHelperInstance->SetInterstitialActive(false);
+    }
+
+    [self performSelector:@selector(loadAd) withObject:nil afterDelay:0.0];
+}
+
+- (void)ad:(nonnull id<GADFullScreenPresentingAd>)ad didFailToPresentFullScreenContentWithError:(nonnull NSError *)error
+{
+    Q_UNUSED(ad)
+
+    qWarning() << QString::fromNSString(error.localizedDescription);
+}
+
+@end
+
 AdMobHelper::AdMobHelper(QObject *parent) :
-    QObject                   (parent),
-    Initialized               (false),
-    ShowPersonalizedAds       (false),
-    BannerViewHeight          (0),
-    BannerViewDelegateInstance(nil)
+    QObject                     (parent),
+    Initialized                 (false),
+    InterstitialActive          (false),
+    BannerViewHeight            (0),
+    BannerViewDelegateInstance  (nil),
+    InterstitialDelegateInstance(nil)
 {
 }
 
 AdMobHelper::~AdMobHelper() noexcept
 {
-    [BannerViewDelegateInstance cleanupAndAutorelease];
+    [BannerViewDelegateInstance   cleanupAndAutorelease];
+    [InterstitialDelegateInstance cleanupAndAutorelease];
 }
 
 AdMobHelper &AdMobHelper::GetInstance()
@@ -179,6 +274,20 @@ AdMobHelper &AdMobHelper::GetInstance()
     static AdMobHelper instance;
 
     return instance;
+}
+
+bool AdMobHelper::interstitialReady() const
+{
+    if (Initialized) {
+        return [InterstitialDelegateInstance isReady];
+    } else {
+        return false;
+    }
+}
+
+bool AdMobHelper::interstitialActive() const
+{
+    return InterstitialActive;
 }
 
 int AdMobHelper::bannerViewHeight() const
@@ -197,16 +306,11 @@ void AdMobHelper::initAds()
 
         [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
 
+        InterstitialDelegateInstance = [[InterstitialDelegate alloc] initWithHelper:this];
+
+        [InterstitialDelegateInstance loadAd];
+
         Initialized = true;
-    }
-}
-
-void AdMobHelper::setPersonalization(bool personalized)
-{
-    ShowPersonalizedAds = personalized;
-
-    if (Initialized) {
-        [BannerViewDelegateInstance setPersonalization:ShowPersonalizedAds];
     }
 }
 
@@ -223,7 +327,6 @@ void AdMobHelper::showBannerView()
 
         BannerViewDelegateInstance = [[BannerViewDelegate alloc] initWithHelper:this];
 
-        [BannerViewDelegateInstance setPersonalization:ShowPersonalizedAds];
         [BannerViewDelegateInstance loadAd];
     }
 }
@@ -240,6 +343,22 @@ void AdMobHelper::hideBannerView()
         }
 
         BannerViewDelegateInstance = nil;
+    }
+}
+
+void AdMobHelper::showInterstitial() const
+{
+    if (Initialized) {
+        [InterstitialDelegateInstance show];
+    }
+}
+
+void AdMobHelper::SetInterstitialActive(bool active)
+{
+    if (InterstitialActive != active) {
+        InterstitialActive = active;
+
+        emit interstitialActiveChanged(InterstitialActive);
     }
 }
 
