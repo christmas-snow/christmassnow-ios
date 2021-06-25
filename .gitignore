@@ -1,0 +1,15 @@
+.DS_Store
+/.qmake.stash
+/Makefile
+/christmassnow.pro.user
+/christmassnow_plugin_import.cpp
+/christmassnow_qml_plugin_import.cpp
+/moc_*.cpp
+/qml_*.cpp
+/qmlcache_loader.cpp
+/qrc_*.cpp
+/.xcode/
+/Debug-iphoneos/
+/Release-iphoneos/
+/christmassnow/Images.xcassets/
+/christmassnow.xcodeproj/
