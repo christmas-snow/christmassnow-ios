@@ -12,7 +12,7 @@ get additional information.
 ---
 
 [![Build Status](https://github.com/christmas-snow/christmassnow-ios/actions/workflows/build.yml/badge.svg?branch=full)](https://github.com/christmas-snow/christmassnow-ios/actions/workflows/build.yml?query=branch%3Afull)
-[![Xcode Analysis Status](https://github.com/christmas-snow/christmassnow-ios/workflows/Xcode%20Analysis/badge.svg)](https://github.com/christmas-snow/christmassnow-ios/actions?query=workflow%3A%22Xcode%20Analysis%22)
+[![Xcode Analysis Status](https://github.com/christmas-snow/christmassnow-ios/actions/workflows/xcode-analysis.yml/badge.svg?branch=full)](https://github.com/christmas-snow/christmassnow-ios/actions/workflows/xcode-analysis.yml?query=branch%3Afull)
 [![SonarCloud Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=christmas-snow_christmassnow-ios&metric=alert_status)](https://sonarcloud.io/dashboard?id=christmas-snow_christmassnow-ios)
 
 [![SonarCloud Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=christmas-snow_christmassnow-ios&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=christmas-snow_christmassnow-ios)
